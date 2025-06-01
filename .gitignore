@@ -1,0 +1,4 @@
+data/buoy_data/
+*.db
+*.log
+*.pid
