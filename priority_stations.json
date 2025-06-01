@@ -1,0 +1,1763 @@
+{
+  "generated_at": "2025-06-01T09:13:42.762350",
+  "total_stations": 35,
+  "station_ids": [
+    "41001",
+    "44013",
+    "44014",
+    "44017",
+    "44025",
+    "44027",
+    "44065",
+    "46012",
+    "46013",
+    "46014",
+    "46022",
+    "46026",
+    "46027",
+    "46042",
+    "46054",
+    "46086",
+    "46221",
+    "46224",
+    "46225",
+    "46232",
+    "46235",
+    "46236",
+    "46237",
+    "51003",
+    "51201",
+    "51202",
+    "51001",
+    "51101",
+    "42001",
+    "42002",
+    "42019",
+    "42020",
+    "42035",
+    "42036",
+    "42040"
+  ],
+  "station_details": {
+    "41001": {
+      "lat": 34.703,
+      "lon": -72.242,
+      "elev": 0.0,
+      "name": "EAST HATTERAS - 150 NM East of Cape Hatteras",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "41083",
+        "41120",
+        "44079",
+        "41025",
+        "41082",
+        "44095",
+        "44014",
+        "44088"
+      ],
+      "distances": [
+        263.00486281469676,
+        284.01190548083775,
+        285.69767563475244,
+        295.04701370667027,
+        296.01039864081406,
+        303.6733472106096,
+        315.58389061336754,
+        316.37867652797024
+      ],
+      "bearings": [
+        296.34750508422604,
+        283.4188897281372,
+        305.69501757825714,
+        277.5599804374038,
+        298.7586267166794,
+        293.4270214876012,
+        312.7714391748937,
+        312.88640999585505
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/41001.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/41001.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=41001"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "44013": {
+      "lat": 42.346,
+      "lon": -70.651,
+      "elev": 0.0,
+      "name": "BOSTON 16 NM East of Boston, MA",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "44029",
+        "bhbm3",
+        "44018",
+        "44090",
+        "44098",
+        "iosn3",
+        "44073",
+        "cmln3"
+      ],
+      "distances": [
+        20.881141915862752,
+        32.80395479814813,
+        43.87412984119861,
+        62.22230200766357,
+        63.9792487721386,
+        69.09000076144345,
+        75.49258810739283,
+        80.60461737664205
+      ],
+      "bearings": [
+        19.48720767867991,
+        271.8825883582109,
+        111.08157462180657,
+        154.61439372597283,
+        37.74181959468774,
+        1.889723480482587,
+        6.865338197884739,
+        357.1694942833757
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/44013.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/44013.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=44013"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "44014": {
+      "lat": 36.603,
+      "lon": -74.837,
+      "elev": 0.0,
+      "name": "VIRGINIA BEACH 64 NM East of Virginia Beach, VA",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "44088",
+        "44079",
+        "41082",
+        "44100",
+        "44086",
+        "44099",
+        "44056",
+        "frfn7"
+      ],
+      "distances": [
+        1.016552523222579,
+        47.59984580247245,
+        77.06327567976132,
+        77.75709249911887,
+        84.96845623889746,
+        86.13520974815012,
+        90.38063264009435,
+        92.87960305540541
+      ],
+      "bearings": [
+        349.8861910582432,
+        178.91950529684084,
+        199.6584249895816,
+        240.66335818421553,
+        218.19192493124618,
+        294.0157875841447,
+        240.53785080596148,
+        240.63549586817237
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/44014.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/44014.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=44014"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "44017": {
+      "lat": 40.693,
+      "lon": -72.049,
+      "elev": 0.0,
+      "name": "MONTAUK POINT - 23 NM SSW of Montauk Point, NY",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "mtkn6",
+        "ldlc3",
+        "44039",
+        "nlnc3",
+        "nlhc3",
+        "44097",
+        "44069",
+        "nwhc3"
+      ],
+      "distances": [
+        40.1930403155978,
+        68.20297878369593,
+        71.00208669913698,
+        74.35779051393972,
+        75.60420411890607,
+        83.65665305632464,
+        87.51140677829706,
+        97.47962767062252
+      ],
+      "bearings": [
+        10.823087074764203,
+        358.03479244365957,
+        314.37707402821866,
+        357.3623678298868,
+        357.026436402258,
+        68.1764527802149,
+        270.7752182938637,
+        312.58052760376745
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/44017.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/44017.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=44017"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "44025": {
+      "lat": 40.258,
+      "lon": -73.175,
+      "elev": 0.0,
+      "name": "LONG ISLAND - 30 NM South of Islip, NY",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "44065",
+        "44069",
+        "sdhn4",
+        "44091",
+        "kptn6",
+        "44022",
+        "44066",
+        "44040"
+      ],
+      "distances": [
+        46.24554391887094,
+        49.59861056543779,
+        74.38492536751747,
+        74.4064884390258,
+        79.16529339326262,
+        83.73436714530624,
+        84.34383212927214,
+        84.8104293073724
+      ],
+      "bearings": [
+        285.50661532483576,
+        8.602218666386705,
+        288.47511580982155,
+        223.11505821870693,
+        321.15395972062845,
+        326.2744639273524,
+        147.36658455191656,
+        336.3578405194218
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/44025.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/44025.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=44025"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "44027": {
+      "lat": 44.284,
+      "lon": -67.301,
+      "elev": 0.0,
+      "name": "Jonesport, ME - 20 NM SE of Jonesport, ME",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "cfwm1",
+        "44034",
+        "atgm1",
+        "psbm1",
+        "mdrm1",
+        "44490",
+        "44037",
+        "mism1"
+      ],
+      "distances": [
+        42.16943531487194,
+        67.71712505064387,
+        72.81224031738483,
+        73.49947904925287,
+        74.72500376234576,
+        84.88278788900412,
+        98.89920663763296,
+        136.09906431348995
+      ],
+      "bearings": [
+        10.373581574320383,
+        252.9928678465746,
+        279.8085766670975,
+        19.922730976056414,
+        242.33618890498133,
+        60.16623479798943,
+        207.96808019124873,
+        246.43095400845147
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/44027.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/44027.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=44027"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "44065": {
+      "lat": 40.368,
+      "lon": -73.701,
+      "elev": 0.0,
+      "name": "New York Harbor Entrance - 15 NM SE of Breezy Point , NY",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "sdhn4",
+        "robn4",
+        "batn6",
+        "44025",
+        "mhrn6",
+        "kptn6",
+        "44022",
+        "44069"
+      ],
+      "distances": [
+        28.302938600623886,
+        44.49232534288115,
+        45.50543189948046,
+        46.24554391887094,
+        49.40294329483598,
+        49.554904379094374,
+        57.31070374524868,
+        63.61730250531058
+      ],
+      "bearings": [
+        292.988670894805,
+        316.3599448921013,
+        324.560796775673,
+        105.1663113419794,
+        308.0622354995008,
+        353.7599918219385,
+        357.7301127940734,
+        54.4526279962671
+      ],
+      "neighbor_count": 8,
+      "region": "east_coast",
+      "priority": 2,
+      "region_description": "US East Coast",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/44065.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/44065.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=44065"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46012": {
+      "lat": 37.356,
+      "lon": -122.881,
+      "elev": 0.0,
+      "name": "HALF MOON BAY - 24NM SSW of San Francisco, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "1801593",
+        "46026",
+        "46237",
+        "rtyc1",
+        "ftpc1",
+        "fpxc1",
+        "pxoc1",
+        "pxsc1"
+      ],
+      "distances": [
+        3.7820049837690006,
+        44.41017765042886,
+        52.73841162111592,
+        61.41093594765504,
+        61.97689067377393,
+        62.066554391449415,
+        65.3067842143405,
+        65.49517858827113
+      ],
+      "bearings": [
+        294.31814290230943,
+        4.769381480565073,
+        24.303356355548317,
+        73.92955353461622,
+        36.03497669293762,
+        35.97422403631373,
+        41.037869897501366,
+        40.485776000350995
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46012.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46012.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46012"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46013": {
+      "lat": 38.235,
+      "lon": -123.317,
+      "elev": 0.0,
+      "name": "BODEGA BAY - 48NM NW of San Francisco, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "bdxc1",
+        "46214",
+        "pryc1",
+        "46026",
+        "gggc1",
+        "46237",
+        "scqc1",
+        "anvc1"
+      ],
+      "distances": [
+        23.32943870192481,
+        35.514423677336225,
+        39.88744855111692,
+        67.93448117049876,
+        74.75506770833512,
+        77.78751836623528,
+        79.35818481398826,
+        83.0080972389301
+      ],
+      "bearings": [
+        66.91732569115806,
+        201.132658847337,
+        131.674289378828,
+        141.78619340459198,
+        108.76138611172166,
+        129.50431313771355,
+        108.87493319769487,
+        335.75306034545133
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46013.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46013.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46013"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46014": {
+      "lat": 39.225,
+      "lon": -123.98,
+      "elev": 0.0,
+      "name": "PT ARENA - 19NM North of Point Arena, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "anvc1",
+        "46013",
+        "bdxc1",
+        "46213",
+        "46214",
+        "pryc1",
+        "46022",
+        "hbyc1"
+      ],
+      "distances": [
+        41.56311137347456,
+        124.19949152124583,
+        128.07675652960822,
+        135.5951476208364,
+        150.10339938082834,
+        162.07898839733636,
+        172.5218983121919,
+        172.64683688452382
+      ],
+      "bearings": [
+        145.94721630292486,
+        152.20800012822508,
+        141.7419769444258,
+        331.2880394651642,
+        162.417336047415,
+        147.1596457272941,
+        344.1213744237504,
+        353.3605750424468
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46014.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46014.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46014"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46022": {
+      "lat": 40.716,
+      "lon": -124.54,
+      "elev": 0.0,
+      "name": "EEL RIVER - 17NM WSW of Eureka, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "46244",
+        "njlc1",
+        "hbyc1",
+        "hbxc1",
+        "tdpc1",
+        "46213",
+        "cecc1",
+        "46027"
+      ],
+      "distances": [
+        25.2042227246967,
+        26.034103690238464,
+        27.796759189262247,
+        29.6803642708183,
+        50.12383735188567,
+        50.31968277708961,
+        118.33639574520073,
+        125.67848729762346
+      ],
+      "bearings": [
+        37.368730229383175,
+        76.81837961797459,
+        78.12282214237626,
+        76.67749288604722,
+        41.104379652016746,
+        200.52348446078196,
+        14.453623067573744,
+        5.978360299146459
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_north",
+      "priority": 1,
+      "region_description": "Northern California to Oregon",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46022.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46022.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46022"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46026": {
+      "lat": 37.754,
+      "lon": -122.839,
+      "elev": 0.0,
+      "name": "SAN FRANCISCO - 18NM West of San Francisco, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "46237",
+        "pryc1",
+        "ftpc1",
+        "fpxc1",
+        "tibc1",
+        "pxsc1",
+        "pxoc1",
+        "gggc1"
+      ],
+      "distances": [
+        18.410966599836655,
+        29.509595834005378,
+        33.28712405161059,
+        33.30640080587766,
+        37.69546024637953,
+        39.22617189041025,
+        39.50294906575817,
+        41.07869595202937
+      ],
+      "bearings": [
+        78.08744978722359,
+        335.8085694494649,
+        79.88248695047264,
+        79.69404324515074,
+        65.85866923673109,
+        81.88040769252058,
+        82.74888883936347,
+        44.72888567413065
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46026.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46026.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46026"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46027": {
+      "lat": 41.84,
+      "lon": -124.382,
+      "elev": 0.0,
+      "name": "ST GEORGES - 8 NM NW of Crescent City, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "cecc1",
+        "tdpc1",
+        "poro3",
+        "46244",
+        "46015",
+        "hbxc1",
+        "njlc1",
+        "hbyc1"
+      ],
+      "distances": [
+        19.459985032830758,
+        89.45845714571097,
+        100.41856706218557,
+        104.98711420462743,
+        108.35943520302763,
+        119.20586933733902,
+        119.68725943527062,
+        120.10553049288194
+      ],
+      "bearings": [
+        122.4216930414982,
+        167.27492206538523,
+        354.58648277223284,
+        178.8989853622404,
+        339.8574179506303,
+        172.4907985282664,
+        174.2249976097388,
+        173.35589842203035
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_north",
+      "priority": 1,
+      "region_description": "Northern California to Oregon",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46027.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46027.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46027"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46042": {
+      "lat": 36.785,
+      "lon": -122.396,
+      "elev": 0.0,
+      "name": "MONTEREY - 27NM WNW of Monterey, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "46092",
+        "46236",
+        "46284",
+        "46240",
+        "meyc1",
+        "myxc1",
+        "46276",
+        "46279"
+      ],
+      "distances": [
+        32.9081913556508,
+        39.83015931690413,
+        44.1533523309224,
+        47.04162445373524,
+        49.43651950758694,
+        49.43651950758694,
+        51.26621351015735,
+        51.61522969111343
+      ],
+      "bearings": [
+        96.48707367992245,
+        94.02894863575722,
+        68.44383803041023,
+        111.92976244069524,
+        113.7309538598522,
+        113.7309538598522,
+        82.35140975454703,
+        83.27127546835374
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46042.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46042.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46042"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46054": {
+      "lat": 34.274,
+      "lon": -120.468,
+      "elev": 0.0,
+      "name": "WEST SANTA BARBARA  38 NM West of Santa Barbara, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "46218",
+        "ptgc1",
+        "46053",
+        "46069",
+        "ntbc1",
+        "46011",
+        "46251",
+        "cpxc1"
+      ],
+      "distances": [
+        34.81225365089956,
+        37.519636953008785,
+        57.92411407883662,
+        70.42473369514751,
+        72.7218194489935,
+        88.29897596970271,
+        100.39383075064025,
+        102.70718360944248
+      ],
+      "bearings": [
+        304.7374935328821,
+        333.9451952029672,
+        93.45498058893202,
+        160.4237964672525,
+        78.2265478953471,
+        326.7571669381336,
+        123.75603568165548,
+        346.01813883705097
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46054.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46054.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46054"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46086": {
+      "lat": 32.499,
+      "lon": -118.052,
+      "elev": 0.0,
+      "name": "SAN CLEMENTE BASIN - 27NM SE Of San Clemente Is, CA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "46258",
+        "46232",
+        "46225",
+        "46235",
+        "46254",
+        "ljac1",
+        "ljpc1",
+        "sdbc1"
+      ],
+      "distances": [
+        58.530778904424075,
+        58.82933447173896,
+        78.44107741945436,
+        83.15209560880328,
+        84.14824637862311,
+        84.91328196072836,
+        84.91328196072836,
+        85.64590405089771
+      ],
+      "bearings": [
+        61.49643088568848,
+        87.88183084621107,
+        51.853958216172884,
+        84.31454909916653,
+        60.60547315243144,
+        60.97634447772043,
+        60.97634447772043,
+        73.55512421999117
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_south",
+      "priority": 1,
+      "region_description": "Southern California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46086.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46086.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46086"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "46221": {
+      "lat": 33.86,
+      "lon": -118.641,
+      "elev": 0.0,
+      "name": "Santa Monica Bay, CA (028)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "46268",
+        "icac1",
+        "pxac1",
+        "ohbc1",
+        "baxc1",
+        "46025",
+        "pfdc1",
+        "psxc1"
+      ],
+      "distances": [
+        18.927875386729745,
+        20.977116840159717,
+        36.34110875965596,
+        37.40129910151269,
+        38.49349549358033,
+        39.11018466992133,
+        39.488580098975845,
+        39.68152492212158
+      ],
+      "bearings": [
+        17.86353532461783,
+        38.2849028001541,
+        106.97710300910666,
+        114.49393697529501,
+        105.64396443057643,
+        252.74329446572153,
+        110.49738728114477,
+        104.8240648239626
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_south",
+      "priority": 1,
+      "region_description": "Southern California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46221.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46221.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46221"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "46224": {
+      "lat": 33.178,
+      "lon": -117.472,
+      "elev": 0.0,
+      "name": "Oceanside Offshore, CA (045)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "46242",
+        "46275",
+        "46274",
+        "46277",
+        "46225",
+        "46266",
+        "46273",
+        "46254"
+      ],
+      "distances": [
+        5.589143476141423,
+        12.851258175451864,
+        19.56748316603397,
+        24.7184265949908,
+        28.269322837285962,
+        30.4521016376923,
+        33.18101648711631,
+        39.4144007615552
+      ],
+      "bearings": [
+        33.31449376252556,
+        347.8926765367006,
+        131.1946223362458,
+        315.3477684044362,
+        164.48983171088707,
+        143.74866787268252,
+        146.1565603461196,
+        150.937464031923
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_south",
+      "priority": 1,
+      "region_description": "Southern California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46224.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46224.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46224"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "46225": {
+      "lat": 32.933,
+      "lon": -117.391,
+      "elev": 0.0,
+      "name": "Torrey Pines Outer, CA (100)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "46266",
+        "46273",
+        "46254",
+        "ljac1",
+        "ljpc1",
+        "46274",
+        "46258",
+        "46224"
+      ],
+      "distances": [
+        10.786507825961738,
+        10.924498897344069,
+        13.647727569113922,
+        14.504134329055494,
+        14.504134329055494,
+        16.041194140306107,
+        22.937812871244173,
+        28.269322837285962
+      ],
+      "bearings": [
+        75.64531249167948,
+        91.71802252086769,
+        121.94391611522747,
+        120.36030806059813,
+        120.36030806059813,
+        26.57232049784443,
+        206.90814792971943,
+        344.53401336132936
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_south",
+      "priority": 1,
+      "region_description": "Southern California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46225.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46225.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46225"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "46232": {
+      "lat": 32.517,
+      "lon": -117.425,
+      "elev": 0.0,
+      "name": "Point Loma South, CA  (191)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "46235",
+        "46258",
+        "tiqc1",
+        "tixc1",
+        "npqc1",
+        "sdbc1",
+        "46254",
+        "ljac1"
+      ],
+      "distances": [
+        24.70935797972679,
+        26.785944331275804,
+        28.135950884968587,
+        28.667251625654277,
+        30.42828000878423,
+        32.132613039434084,
+        41.73616229816111,
+        41.97369063049712
+      ],
+      "bearings": [
+        76.13278804153776,
+        344.40485815753095,
+        78.29304922231921,
+        76.91869138656693,
+        72.04056738541107,
+        46.95436495893972,
+        20.70563990435528,
+        21.95148049334381
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_south",
+      "priority": 1,
+      "region_description": "Southern California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46232.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46232.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46232"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "46235": {
+      "lat": 32.57,
+      "lon": -117.169,
+      "elev": 0.0,
+      "name": "Imperial Beach Nearshore, CA (155)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "tiqc1",
+        "tixc1",
+        "npqc1",
+        "sdbc1",
+        "46232",
+        "ljac1",
+        "ljpc1",
+        "46254"
+      ],
+      "distances": [
+        3.5678732724134505,
+        3.9746939181653005,
+        6.04481798001016,
+        16.01891205672626,
+        24.70935797972679,
+        34.03555510949636,
+        34.03555510949636,
+        34.38100549753567
+      ],
+      "bearings": [
+        93.5634036386233,
+        81.94787312251805,
+        55.21824054499922,
+        358.32660551457315,
+        256.2705008005978,
+        346.02609377263366,
+        346.02609377263366,
+        344.56078915056156
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_south",
+      "priority": 1,
+      "region_description": "Southern California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46235.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46235.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46235"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "46236": {
+      "lat": 36.759,
+      "lon": -121.95,
+      "elev": 0.0,
+      "name": "Monterey Canyon Outer, CA  (156)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "46092",
+        "46279",
+        "46276",
+        "mlsc1",
+        "46240",
+        "evmc1",
+        "meyc1",
+        "myxc1"
+      ],
+      "distances": [
+        7.094068499869,
+        14.530927946580157,
+        14.673417905150936,
+        14.945973385811895,
+        15.277814447679189,
+        16.28913000580425,
+        17.967235142585437,
+        17.967235142585437
+      ],
+      "bearings": [
+        262.82008147616,
+        52.76597239864793,
+        49.292184121443654,
+        71.29486903975084,
+        165.45340700832594,
+        69.15727595981826,
+        162.35876070799065,
+        162.35876070799065
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46236.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46236.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46236"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "46237": {
+      "lat": 37.788,
+      "lon": -122.634,
+      "elev": 0.0,
+      "name": "San Francisco Bar, CA  (142)",
+      "owner": "SCRIPPS",
+      "type": "buoy",
+      "neighbors": [
+        "ftpc1",
+        "fpxc1",
+        "46026",
+        "tibc1",
+        "pxsc1",
+        "pxoc1",
+        "rcmc1",
+        "obxc1"
+      ],
+      "distances": [
+        14.896359770811367,
+        14.911608356821892,
+        18.410966599836655,
+        20.084476931295445,
+        20.891063184490235,
+        21.205729958161612,
+        24.740555858247628,
+        25.80612403815019
+      ],
+      "bearings": [
+        82.2267813222187,
+        81.80334883064143,
+        258.2130138200122,
+        54.788297237244706,
+        85.34806771620356,
+        86.9204063873724,
+        52.5765088596965,
+        85.95702138357365
+      ],
+      "neighbor_count": 8,
+      "region": "west_coast_central",
+      "priority": 1,
+      "region_description": "Central California",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46237.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/46237.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46237"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "51003": {
+      "lat": 19.143,
+      "lon": -160.645,
+      "elev": 0.0,
+      "name": "WESTERN  HAWAII - 205 NM SW of Honolulu, HI",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "nwwh1",
+        "51212",
+        "51208",
+        "51211",
+        "prhh1",
+        "oouh1",
+        "51002",
+        "51201"
+      ],
+      "distances": [
+        340.28018243355194,
+        355.7584935261025,
+        366.69618894021835,
+        368.6457276908886,
+        373.3103665637213,
+        376.5755520487191,
+        382.6379505956559,
+        385.1700246491053
+      ],
+      "bearings": [
+        23.062202997173017,
+        46.626011695734974,
+        17.496987308682208,
+        49.025215305283155,
+        48.058961387262514,
+        49.901014103839884,
+        126.58424708086574,
+        42.699349203036036
+      ],
+      "neighbor_count": 8,
+      "region": "hawaii",
+      "priority": 1,
+      "region_description": "Hawaiian Islands",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/51003.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/51003.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=51003"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "51201": {
+      "lat": 21.671,
+      "lon": -158.118,
+      "elev": 0.0,
+      "name": "Waimea Bay, HI (106)",
+      "owner": "Pacific Islands Ocean Observing System",
+      "type": "buoy",
+      "neighbors": [
+        "prhh1",
+        "51212",
+        "hwwh1",
+        "hrrh1",
+        "pphh1",
+        "mokh1",
+        "51210",
+        "51207"
+      ],
+      "distances": [
+        37.36893315958268,
+        38.82852103030161,
+        40.97903167538929,
+        41.16029229108492,
+        42.18640077482546,
+        43.023972952548135,
+        43.11391889223078,
+        43.562340227953
+      ],
+      "bearings": [
+        154.7386978975336,
+        184.7437456614268,
+        129.15876839638486,
+        130.36246893526675,
+        133.62172843441851,
+        127.89939730423896,
+        119.9563125042767,
+        119.61514478191646
+      ],
+      "neighbor_count": 8,
+      "region": "hawaii",
+      "priority": 1,
+      "region_description": "Hawaiian Islands",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/51201.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/51201.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=51201"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "51202": {
+      "lat": 21.417,
+      "lon": -157.68,
+      "elev": 0.0,
+      "name": "Mokapu Point, HI (098)",
+      "owner": "Pacific Islands Ocean Observing System",
+      "type": "buoy",
+      "neighbors": [
+        "51207",
+        "51210",
+        "mokh1",
+        "hwwh1",
+        "hrrh1",
+        "pphh1",
+        "oouh1",
+        "prhh1"
+      ],
+      "distances": [
+        10.001942099883932,
+        10.393207210465269,
+        11.524363792647758,
+        13.759296683486623,
+        14.060519574521365,
+        14.829988009246344,
+        22.97209051320925,
+        29.924759767940717
+      ],
+      "bearings": [
+        311.8521765295254,
+        309.94984084495434,
+        278.90086502474185,
+        279.79489600229306,
+        276.3812622322494,
+        266.58722134625265,
+        236.54247359022693,
+        259.3445740674945
+      ],
+      "neighbor_count": 8,
+      "region": "hawaii",
+      "priority": 1,
+      "region_description": "Hawaiian Islands",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/51202.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/51202.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=51202"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "51001": {
+      "lat": 24.475,
+      "lon": -162.03,
+      "elev": 0.0,
+      "name": "NORTHWESTERN HAWAII ONE - 188 NM NW of Kauai Island, HI",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "51101",
+        "51208",
+        "nwwh1"
+      ],
+      "distances": [
+        13.893824377703273,
+        349.4615470335072,
+        391.6623332381205
+      ],
+      "bearings": [
+        201.82839503021256,
+        133.67693925196784,
+        135.16330011608727
+      ],
+      "neighbor_count": 3,
+      "region": "hawaii",
+      "priority": 1,
+      "region_description": "Hawaiian Islands",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/51001.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/51001.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=51001"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 1
+    },
+    "51101": {
+      "lat": 24.359,
+      "lon": -162.081,
+      "elev": 0.0,
+      "name": "NORTHWESTERN HAWAII TWO - 186 NM NW of Kauai Is., HI   ",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "51001",
+        "51208",
+        "nwwh1"
+      ],
+      "distances": [
+        13.893824377703273,
+        344.53208775656964,
+        386.3693280527663
+      ],
+      "bearings": [
+        21.807312912793407,
+        131.51291072527533,
+        133.25241481316027
+      ],
+      "neighbor_count": 3,
+      "region": "hawaii",
+      "priority": 1,
+      "region_description": "Hawaiian Islands",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/51101.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/51101.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=51101"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 1
+    },
+    "42001": {
+      "lat": 25.926,
+      "lon": -89.662,
+      "elev": 0.0,
+      "name": "MID GULF - 180 nm South of Southwest Pass, LA",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "42409",
+        "katp",
+        "kgry",
+        "ksqe",
+        "kgbk",
+        "kipn",
+        "kmdj",
+        "wdel1"
+      ],
+      "distances": [
+        39.71687299075927,
+        145.70107490230097,
+        204.13346585334202,
+        265.8251124254473,
+        289.9201523970421,
+        291.8858546214215,
+        302.398009981618,
+        304.4269123733828
+      ],
+      "bearings": [
+        110.74680574522608,
+        345.653535494474,
+        337.9130276736664,
+        334.71702105174285,
+        299.91354999489806,
+        34.292233204223635,
+        357.55766593540216,
+        2.0395474274678236
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42001.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42001.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42001"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 2
+    },
+    "42002": {
+      "lat": 26.055,
+      "lon": -93.646,
+      "elev": 0.0,
+      "name": "WEST GULF - 207 NM East of Brownsville, TX",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "kgul",
+        "khhv",
+        "kvaf",
+        "kgbk",
+        "kemk",
+        "khqi",
+        "kghb",
+        "42019"
+      ],
+      "distances": [
+        139.296351976376,
+        142.950710144975,
+        174.12652787528143,
+        192.08128982772405,
+        207.30967725420726,
+        208.94769243892327,
+        257.68206620973035,
+        265.944965120912
+      ],
+      "bearings": [
+        4.39390651927755,
+        313.6733399113603,
+        326.2676317184201,
+        47.985674233184454,
+        341.2641889214608,
+        359.38029538110123,
+        39.25207159015321,
+        321.1628880268675
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42002.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42002.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42002"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 2
+    },
+    "42019": {
+      "lat": 27.908,
+      "lon": -95.343,
+      "elev": 0.0,
+      "name": "FREEPORT, TX - 60 NM South of Freeport, TX",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "kbqx",
+        "kbbf",
+        "42049",
+        "kgvx",
+        "kmzg",
+        "kvaf",
+        "sgnt2",
+        "kemk"
+      ],
+      "distances": [
+        52.689240617866915,
+        54.557097075270356,
+        81.56786496865037,
+        82.62073569237131,
+        85.79059045396615,
+        93.79674428148806,
+        99.6374568181704,
+        100.75633125318755
+      ],
+      "bearings": [
+        329.0263231707989,
+        287.9254954516043,
+        307.30594070588324,
+        25.706593729756094,
+        256.63023120748863,
+        130.88604736183072,
+        344.4521024587288,
+        95.39818688611479
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42019.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42019.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42019"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 2
+    },
+    "42020": {
+      "lat": 26.97,
+      "lon": -96.679,
+      "elev": 0.0,
+      "name": "CORPUS CHRISTI, TX - 60NM SSE of Corpus Christi, TX",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "babt2",
+        "rsjt2",
+        "42092",
+        "irdt2",
+        "42045",
+        "pmnt2",
+        "pact2",
+        "42044"
+      ],
+      "distances": [
+        80.52020240439323,
+        80.76393383355456,
+        81.4424253059793,
+        85.19391146681097,
+        85.60048180824474,
+        86.94467173914171,
+        92.14748675500066,
+        94.18907890599831
+      ],
+      "bearings": [
+        297.00977001310565,
+        256.72456457682733,
+        336.2482137205541,
+        311.87877984394055,
+        167.9592864681208,
+        238.45733411517472,
+        323.3772071022977,
+        203.208993984461
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42020.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42020.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42020"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 2
+    },
+    "42035": {
+      "lat": 29.235,
+      "lon": -94.41,
+      "elev": 0.0,
+      "name": "GALVESTON,TX -  22 NM East of Galveston, TX",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "kxih",
+        "kgvw",
+        "rlot2",
+        "gnjt2",
+        "gtot2",
+        "hist2",
+        "42050",
+        "grrt2"
+      ],
+      "distances": [
+        12.388202419178223,
+        17.917622807147158,
+        32.695147260547586,
+        33.42344557701468,
+        38.003695140619136,
+        40.077020071543885,
+        46.65193239751989,
+        47.72681320610717
+      ],
+      "bearings": [
+        240.4448099461775,
+        229.37036370124488,
+        342.2514175630403,
+        294.0230425161101,
+        282.9415083615837,
+        2.765682240291028,
+        159.46625374713074,
+        279.09922538932074
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42035.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42035.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42035"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 2
+    },
+    "42036": {
+      "lat": 28.501,
+      "lon": -84.508,
+      "elev": 0.0,
+      "name": "WEST TAMPA  - 112 NM WNW of Tampa, FL",
+      "owner": "NDBC",
+      "type": "buoy",
+      "neighbors": [
+        "sgof1",
+        "42099",
+        "42022",
+        "adbf1",
+        "apcf1",
+        "apxf1",
+        "apqf1",
+        "42039"
+      ],
+      "distances": [
+        106.44759420340657,
+        129.7973748166523,
+        133.92392039898422,
+        141.05837504371488,
+        143.5132251613617,
+        145.57472297710157,
+        147.2634693719069,
+        149.69766543930933
+      ],
+      "bearings": [
+        341.42706355055014,
+        169.78732174886977,
+        145.6065659918246,
+        337.86920466384385,
+        341.4813535201993,
+        345.6803409419893,
+        346.08264807399763,
+        282.623881455172
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42036.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42036.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42036"
+      },
+      "enhanced_type": "spectral_buoy",
+      "collection_priority": 2
+    },
+    "42040": {
+      "lat": 29.207,
+      "lon": -88.237,
+      "elev": 0.0,
+      "name": "LUKE OFFSHORE TEST PLATFORM - 63 NM South of Dauphin Island, AL",
+      "owner": "NDBC",
+      "type": "other",
+      "neighbors": [
+        "kvky",
+        "kvoa",
+        "42354",
+        "kmis",
+        "kikt",
+        "cgcl1",
+        "42031",
+        "pill1"
+      ],
+      "distances": [
+        20.314029021323392,
+        44.32117545586809,
+        57.080265885640536,
+        59.52288115353986,
+        76.44761094313192,
+        92.10837843712466,
+        98.21483741006607,
+        99.25522714018189
+      ],
+      "bearings": [
+        283.0189036591342,
+        86.72469972026227,
+        316.5409807197183,
+        279.71822617907145,
+        183.8105673456549,
+        240.05331410585984,
+        1.4033538138898507,
+        268.45173976102285
+      ],
+      "neighbor_count": 8,
+      "region": "gulf_mexico",
+      "priority": 3,
+      "region_description": "Gulf of Mexico",
+      "has_spectral": true,
+      "data_urls": {
+        "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/42040.txt",
+        "realtime_spec": "https://www.ndbc.noaa.gov/data/realtime2/42040.spec",
+        "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=42040"
+      },
+      "enhanced_type": "other",
+      "collection_priority": 2
+    }
+  }
+}
