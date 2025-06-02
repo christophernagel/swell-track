@@ -3,6 +3,7 @@
 spectral_data_processor.py
 --------------------------
 Complete processor for NDBC spectral data integration with your wave transformer.
+Updated to handle raw spectral density (.data_spec) files for true frequency-domain data.
 Location: data/spectral_data_processor.py (or swell_tracker/spectral_data_processor.py)
 """
 
@@ -41,8 +42,127 @@ class SpectralDataProcessor:
         self.swell_threshold = 0.15  # Hz - waves below this are swell
         self.windsea_threshold = 0.25  # Hz - waves above this are wind sea
         
+    def parse_raw_spectral_file(self, filepath: Path) -> List[Dict]:
+        """Parse a .data_spec file containing true spectral density (m²/Hz)"""
+        records = []
+        
+        try:
+            with gzip.open(filepath, 'rt') as f:
+                content = f.read().strip()
+        
+            lines = content.split('\n')
+            
+            # The .data_spec format has frequency bins in the header
+            # Format: YY MM DD hh mm (freq1) (freq2) ... (freq47)
+            #         2024 12 01 14 00 0.033 0.033 0.033 ...
+            
+            for line in lines:
+                if line.startswith('#') or not line.strip():
+                    continue
+                    
+                parts = line.split()
+                if len(parts) < 52:  # 5 time fields + 47 frequency bins
+                    continue
+                
+                try:
+                    # Parse timestamp
+                    year = int(parts[0])
+                    if year < 100:
+                        year += 2000
+                    month = int(parts[1])
+                    day = int(parts[2])
+                    hour = int(parts[3])
+                    minute = int(parts[4])
+                    
+                    timestamp = datetime(year, month, day, hour, minute)
+                    
+                    # Parse spectral density values (m²/Hz)
+                    spectral_values = []
+                    for i in range(5, min(52, len(parts))):  # 47 frequency bins
+                        val = parts[i]
+                        if val in ['MM', '999.00', '-999.00', '99.00']:
+                            spectral_values.append(np.nan)
+                        else:
+                            spectral_values.append(float(val))
+                    
+                    records.append({
+                        'timestamp': timestamp,
+                        'spectral_density': np.array(spectral_values),
+                        'n_frequencies': len(spectral_values),
+                        'is_raw_spectral': True  # Flag to indicate this is true spectral density
+                    })
+                    
+                except Exception as e:
+                    logger.debug(f"Error parsing raw spectral line: {line[:50]}... - {e}")
+                    continue
+                    
+        except Exception as e:
+            logger.error(f"Error reading {filepath}: {e}")
+        
+        return records
+        
+    def parse_directional_file(self, filepath: Path) -> List[Dict]:
+        """Parse directional spectral data files"""
+        records = []
+        
+        try:
+            with gzip.open(filepath, 'rt') as f:
+                content = f.read().strip()
+                
+            lines = content.split('\n')
+            
+            for line in lines:
+                if line.startswith('#') or not line.strip():
+                    continue
+                    
+                parts = line.split()
+                if len(parts) < 5:
+                    continue
+                    
+                try:
+                    # Parse timestamp
+                    year = int(parts[0])
+                    if year < 100:
+                        year += 2000
+                    month = int(parts[1])
+                    day = int(parts[2])
+                    hour = int(parts[3])
+                    minute = int(parts[4])
+                    
+                    timestamp = datetime(year, month, day, hour, minute)
+                    
+                    # Parse directional values (mean wave direction for each frequency)
+                    directional_values = []
+                    for val in parts[5:]:
+                        if val in ['MM', '999.0', '-999.0', '999']:
+                            directional_values.append(np.nan)
+                        else:
+                            try:
+                                dir_val = float(val)
+                                # Convert negative directions to 0-360 range
+                                if dir_val < 0:
+                                    dir_val += 360
+                                directional_values.append(dir_val)
+                            except ValueError:
+                                directional_values.append(np.nan)
+                    
+                    records.append({
+                        'timestamp': timestamp,
+                        'mean_directions': np.array(directional_values),
+                        'n_frequencies': len(directional_values)
+                    })
+                    
+                except Exception as e:
+                    logger.debug(f"Error parsing directional line: {line[:50]}... - {e}")
+                    continue
+        
+        except Exception as e:
+            logger.error(f"Error reading {filepath}: {e}")
+            
+        return records
+    
     def parse_spectral_file(self, filepath: Path) -> List[Dict]:
-        """Parse a single compressed spectral file"""
+        """Parse a single compressed spectral file (legacy wave summary data)"""
         records = []
         
         try:
@@ -72,7 +192,8 @@ class SpectralDataProcessor:
                     records.append({
                         'timestamp': timestamp,
                         'spectral_density': np.array(spectral_values),
-                        'n_frequencies': len(spectral_values)
+                        'n_frequencies': len(spectral_values),
+                        'is_raw_spectral': False  # This is summary data
                     })
                     
                 except (ValueError, IndexError) as e:
@@ -254,12 +375,14 @@ class SpectralDataProcessor:
     
     def create_transformer_features(self, station_id: str, 
                                    spectral_records: List[Dict],
+                                   directional_records: List[Dict],
                                    wave_records: List[Dict]) -> np.ndarray:
-        """Convert spectral and wave data to transformer features"""
+        """Convert spectral, directional, and wave data to transformer features"""
         
-        # Combine timestamps from both data sources
+        # Combine timestamps from all data sources
         all_timestamps = set()
         spectral_dict = {}
+        directional_dict = {}
         wave_dict = {}
         
         # Index spectral records by timestamp
@@ -267,6 +390,12 @@ class SpectralDataProcessor:
             ts = record['timestamp']
             all_timestamps.add(ts)
             spectral_dict[ts] = record
+        
+        # Index directional records by timestamp
+        for record in directional_records:
+            ts = record['timestamp']
+            all_timestamps.add(ts)
+            directional_dict[ts] = record
         
         # Index wave records by timestamp
         for record in wave_records:
@@ -281,7 +410,7 @@ class SpectralDataProcessor:
         features = []
         
         for ts in sorted_timestamps:
-            feature_vec = np.full(15, np.nan)  # 15 features total
+            feature_vec = np.full(18, np.nan)  # 18 features total (added directional features)
             
             # Get spectral data if available
             if ts in spectral_dict:
@@ -321,34 +450,86 @@ class SpectralDataProcessor:
                 # Features 10-11: Derived parameters
                 feature_vec[10] = np.log1p(bulk_params['energy_density'])  # Log energy
                 feature_vec[11] = bulk_params['peak_period'] * bulk_params['significant_height']  # Steepness proxy
+                
+                # Feature 12: Raw spectral flag
+                feature_vec[12] = 1.0 if spec_record.get('is_raw_spectral', False) else 0.0
             
-            # Get wave parameter data if available (features 12-14)
+            # Get directional data if available (features 13-15)
+            if ts in directional_dict:
+                dir_record = directional_dict[ts]
+                mean_directions = dir_record['mean_directions']
+                
+                # Compute directional statistics
+                valid_dirs = mean_directions[~np.isnan(mean_directions)]
+                if len(valid_dirs) > 0:
+                    # Convert to radians for circular statistics
+                    dirs_rad = np.deg2rad(valid_dirs)
+                    
+                    # Mean direction using circular statistics
+                    mean_dir = np.rad2deg(np.arctan2(np.mean(np.sin(dirs_rad)), 
+                                                   np.mean(np.cos(dirs_rad))))
+                    if mean_dir < 0:
+                        mean_dir += 360
+                    
+                    # Directional spread (circular standard deviation)
+                    R = np.sqrt(np.mean(np.sin(dirs_rad))**2 + np.mean(np.cos(dirs_rad))**2)
+                    dir_spread = np.rad2deg(np.sqrt(-2 * np.log(R))) if R > 0 else np.nan
+                    
+                    # Peak directional frequency (most common direction)
+                    hist, bins = np.histogram(valid_dirs, bins=36, range=(0, 360))
+                    peak_dir = bins[np.argmax(hist)] + 5  # Center of bin
+                    
+                    feature_vec[13] = mean_dir
+                    feature_vec[14] = dir_spread
+                    feature_vec[15] = peak_dir
+            
+            # Get wave parameter data if available (features 16-17)
             if ts in wave_dict:
                 wave_record = wave_dict[ts]
-                feature_vec[12] = wave_record.get('wvht', np.nan)  # Wave height
-                feature_vec[13] = wave_record.get('dpd', np.nan)   # Dominant period
-                feature_vec[14] = wave_record.get('mwd', np.nan)   # Mean wave direction
+                feature_vec[15] = wave_record.get('wvht', np.nan)  # Wave height
+                feature_vec[16] = wave_record.get('dpd', np.nan)   # Dominant period
+                feature_vec[17] = wave_record.get('mwd', np.nan)   # Mean wave direction
             
             features.append(feature_vec)
         
         return np.array(features), sorted_timestamps
     
-    def load_station_data(self, station_id: str, max_files: int = 100) -> Tuple[List[Dict], List[Dict]]:
-        """Load spectral and wave data for a station"""
+    def load_station_data(self, station_id: str, max_files: int = 100) -> Tuple[List[Dict], List[Dict], List[Dict]]:
+        """Load raw spectral, directional, and wave data for a station"""
         raw_dir = self.data_dir / "raw"
         
-        # Find files for this station
-        spectral_files = sorted(raw_dir.glob(f"{station_id}_spectral_*.gz"))[-max_files:]
+        # Updated to look for raw_spectral files!
+        raw_spectral_files = sorted(raw_dir.glob(f"{station_id}_raw_spectral_*.gz"))[-max_files:]
+        directional_files = sorted(raw_dir.glob(f"{station_id}_directional_*.gz"))[-max_files:]
         wave_files = sorted(raw_dir.glob(f"{station_id}_wave_*.gz"))[-max_files:]
         
-        logger.info(f"Loading {len(spectral_files)} spectral and {len(wave_files)} wave files for {station_id}")
+        # Fallback to legacy spectral files if no raw spectral files found
+        if not raw_spectral_files:
+            legacy_spectral_files = sorted(raw_dir.glob(f"{station_id}_spectral_*.gz"))[-max_files:]
+            logger.info(f"No raw spectral files found for {station_id}, using {len(legacy_spectral_files)} legacy spectral files")
+        else:
+            legacy_spectral_files = []
         
-        # Parse all files
+        logger.info(f"Loading {len(raw_spectral_files)} raw spectral, {len(directional_files)} directional, and {len(wave_files)} wave files for {station_id}")
+        
+        # Parse raw spectral files (true frequency-domain data!)
         all_spectral_records = []
-        for filepath in spectral_files:
+        for filepath in raw_spectral_files:
+            records = self.parse_raw_spectral_file(filepath)
+            all_spectral_records.extend(records)
+        
+        # Parse legacy spectral files if needed
+        for filepath in legacy_spectral_files:
             records = self.parse_spectral_file(filepath)
             all_spectral_records.extend(records)
         
+        # Parse directional files
+        all_directional_records = []
+        for filepath in directional_files:
+            records = self.parse_directional_file(filepath)
+            all_directional_records.extend(records)
+        
+        # Parse wave files
         all_wave_records = []
         for filepath in wave_files:
             records = self.parse_wave_file(filepath)
@@ -356,14 +537,16 @@ class SpectralDataProcessor:
         
         # Remove duplicates and sort by timestamp
         spectral_dict = {r['timestamp']: r for r in all_spectral_records}
+        directional_dict = {r['timestamp']: r for r in all_directional_records}
         wave_dict = {r['timestamp']: r for r in all_wave_records}
         
         spectral_records = sorted(spectral_dict.values(), key=lambda x: x['timestamp'])
+        directional_records = sorted(directional_dict.values(), key=lambda x: x['timestamp'])
         wave_records = sorted(wave_dict.values(), key=lambda x: x['timestamp'])
         
-        logger.info(f"Loaded {len(spectral_records)} spectral and {len(wave_records)} wave records for {station_id}")
+        logger.info(f"Loaded {len(spectral_records)} spectral, {len(directional_records)} directional, and {len(wave_records)} wave records for {station_id}")
         
-        return spectral_records, wave_records
+        return spectral_records, directional_records, wave_records
     
     def process_all_stations(self, station_ids: List[str]) -> Dict[str, Tuple[np.ndarray, List[datetime]]]:
         """Process all stations and return transformer-ready features"""
@@ -375,15 +558,15 @@ class SpectralDataProcessor:
                 logger.info(f"Processing station {station_id}...")
                 
                 # Load raw data
-                spectral_records, wave_records = self.load_station_data(station_id)
+                spectral_records, directional_records, wave_records = self.load_station_data(station_id)
                 
-                if not spectral_records and not wave_records:
+                if not spectral_records and not directional_records and not wave_records:
                     logger.warning(f"No data found for station {station_id}")
                     continue
                 
                 # Create features
                 features, timestamps = self.create_transformer_features(
-                    station_id, spectral_records, wave_records
+                    station_id, spectral_records, directional_records, wave_records
                 )
                 
                 if len(features) > 0:
@@ -412,7 +595,8 @@ class SpectralDataProcessor:
                     'significant_height', 'peak_period', 'mean_period', 'spectral_width',
                     'peak_frequency', 'energy_density', 'swell_energy', 'windsea_energy',
                     'swell_fraction', 'windsea_fraction', 'log_energy', 'steepness_proxy',
-                    'wave_height', 'dominant_period', 'mean_direction'
+                    'is_raw_spectral', 'mean_direction', 'directional_spread', 'peak_direction',
+                    'wave_height', 'dominant_period', 'mean_wave_direction'
                 ]
             }
         
@@ -439,9 +623,14 @@ def main():
         # Auto-detect stations from collected data
         raw_dir = Path(args.data_dir) / "raw"
         if raw_dir.exists():
+            # Prioritize raw spectral files, fall back to legacy spectral
             station_ids = list(set(
-                f.name.split('_')[0] for f in raw_dir.glob("*_spectral_*.gz")
+                f.name.split('_')[0] for f in raw_dir.glob("*_raw_spectral_*.gz")
             ))
+            if not station_ids:
+                station_ids = list(set(
+                    f.name.split('_')[0] for f in raw_dir.glob("*_spectral_*.gz")
+                ))
             logger.info(f"Auto-detected {len(station_ids)} stations: {', '.join(sorted(station_ids))}")
         else:
             logger.error(f"No data directory found at {raw_dir}")
@@ -458,7 +647,7 @@ def main():
         print(f"\nProcessing Summary:")
         print(f"Stations processed: {len(station_features)}")
         print(f"Total feature vectors: {total_features}")
-        print(f"Features per vector: 15")
+        print(f"Features per vector: 18")
         print(f"Output saved to: {args.output}")
         
         # Show sample data
@@ -468,6 +657,10 @@ def main():
             print(f"\nSample from station {sample_station}:")
             print(f"Time range: {sample_timestamps[0]} to {sample_timestamps[-1]}")
             print(f"Feature shape: {sample_features.shape}")
+            
+            # Show data quality info
+            raw_spectral_count = np.sum(sample_features[:, 12] == 1.0)
+            print(f"Raw spectral records: {raw_spectral_count}/{len(sample_features)} ({100*raw_spectral_count/len(sample_features):.1f}%)")
     else:
         logger.error("No station data was successfully processed")
 
