@@ -1,64 +1,27 @@
 #!/usr/bin/env python3
 """
-Production NDBC Data Collector
-High-performance, fault-tolerant data collection system for NDBC buoy stations
+Optimized NDBC Data Collector
+Maintains single files per station/data_type, appending new records and managing 45-day windows
 """
 
 import os
-import sys
+import gzip
 import json
 import time
-import gzip
-import shutil
 import signal
 import logging
-import argparse
 import requests
 import pandas as pd
-import numpy as np
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Set
+from typing import Dict, List, Optional, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 import sqlite3
 from contextlib import contextmanager
 import hashlib
-
-# Configure logging
-def setup_logging(log_dir: str = "logs"):
-    """Setup comprehensive logging"""
-    Path(log_dir).mkdir(exist_ok=True)
-    
-    # Create formatters
-    detailed_formatter = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s'
-    )
-    simple_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-    
-    # File handler for detailed logs
-    file_handler = logging.FileHandler(f"{log_dir}/collector.log")
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(detailed_formatter)
-    
-    # Console handler for important messages
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(simple_formatter)
-    
-    # Error file handler
-    error_handler = logging.FileHandler(f"{log_dir}/errors.log")
-    error_handler.setLevel(logging.ERROR)
-    error_handler.setFormatter(detailed_formatter)
-    
-    # Root logger
-    root_logger = logging.getLogger()
-    root_logger.setLevel(logging.DEBUG)
-    root_logger.addHandler(file_handler)
-    root_logger.addHandler(console_handler)
-    root_logger.addHandler(error_handler)
-    
-    return root_logger
+import tempfile
+import shutil
 
 @dataclass
 class CollectionRecord:
@@ -68,136 +31,31 @@ class CollectionRecord:
     data_type: str
     status: str
     records_collected: int
+    records_appended: int
     file_size: int
     error_message: Optional[str] = None
     response_time: Optional[float] = None
     data_hash: Optional[str] = None
 
-class CollectionDatabase:
-    """SQLite database for tracking collection metadata"""
-    
-    def __init__(self, db_path: str = "data/collection_metadata.db"):
-        self.db_path = Path(db_path)
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self._init_db()
-    
-    def _init_db(self):
-        """Initialize database schema"""
-        with self._get_connection() as conn:
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS collections (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    station_id TEXT NOT NULL,
-                    timestamp TEXT NOT NULL,
-                    data_type TEXT NOT NULL,
-                    status TEXT NOT NULL,
-                    records_collected INTEGER,
-                    file_size INTEGER,
-                    error_message TEXT,
-                    response_time REAL,
-                    data_hash TEXT,
-                    created_at TEXT DEFAULT CURRENT_TIMESTAMP
-                )
-            """)
-            
-            conn.execute("""
-                CREATE INDEX IF NOT EXISTS idx_station_timestamp 
-                ON collections(station_id, timestamp)
-            """)
-            
-            conn.execute("""
-                CREATE INDEX IF NOT EXISTS idx_status_created 
-                ON collections(status, created_at)
-            """)
-    
-    @contextmanager
-    def _get_connection(self):
-        """Get database connection with proper cleanup"""
-        conn = sqlite3.connect(self.db_path)
-        try:
-            yield conn
-            conn.commit()
-        except Exception:
-            conn.rollback()
-            raise
-        finally:
-            conn.close()
-    
-    def record_collection(self, record: CollectionRecord):
-        """Record a collection attempt"""
-        with self._get_connection() as conn:
-            conn.execute("""
-                INSERT INTO collections 
-                (station_id, timestamp, data_type, status, records_collected, 
-                 file_size, error_message, response_time, data_hash)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (
-                record.station_id,
-                record.timestamp.isoformat(),
-                record.data_type,
-                record.status,
-                record.records_collected,
-                record.file_size,
-                record.error_message,
-                record.response_time,
-                record.data_hash
-            ))
-    
-    def get_last_collection(self, station_id: str, data_type: str) -> Optional[datetime]:
-        """Get timestamp of last successful collection"""
-        with self._get_connection() as conn:
-            cursor = conn.execute("""
-                SELECT timestamp FROM collections 
-                WHERE station_id = ? AND data_type = ? AND status = 'success'
-                ORDER BY timestamp DESC LIMIT 1
-            """, (station_id, data_type))
-            
-            result = cursor.fetchone()
-            return datetime.fromisoformat(result[0]) if result else None
-    
-    def get_statistics(self, hours: int = 24) -> Dict:
-        """Get collection statistics for last N hours"""
-        cutoff = datetime.now() - timedelta(hours=hours)
-        
-        with self._get_connection() as conn:
-            cursor = conn.execute("""
-                SELECT 
-                    status,
-                    data_type,
-                    COUNT(*) as count,
-                    AVG(response_time) as avg_response_time,
-                    SUM(records_collected) as total_records
-                FROM collections 
-                WHERE datetime(created_at) > datetime(?)
-                GROUP BY status, data_type
-            """, (cutoff.isoformat(),))
-            
-            return {
-                f"{row[1]}_{row[0]}": {
-                    'count': row[2],
-                    'avg_response_time': row[3],
-                    'total_records': row[4]
-                }
-                for row in cursor.fetchall()
-            }
-
-class ProductionBuoyCollector:
-    """Production-grade NDBC data collector"""
+class OptimizedBuoyCollector:
+    """
+    Optimized NDBC data collector that maintains single files per station/data_type
+    and manages 45-day rolling windows
+    """
     
     def __init__(self, data_dir: str = "data/buoy_data", config_file: str = "enhanced_stations.json"):
         self.data_dir = Path(data_dir)
         self.data_dir.mkdir(parents=True, exist_ok=True)
         
-        # Setup subdirectories
-        (self.data_dir / "raw").mkdir(exist_ok=True)
-        (self.data_dir / "processed").mkdir(exist_ok=True)
-        (self.data_dir / "archive").mkdir(exist_ok=True)
+        # Setup optimized directory structure
+        (self.data_dir / "current").mkdir(exist_ok=True)  # Current rolling files
+        (self.data_dir / "archive").mkdir(exist_ok=True)  # Long-term storage
+        (self.data_dir / "temp").mkdir(exist_ok=True)     # Temporary processing
         
         # Load station configuration
         with open(config_file, 'r') as f:
             self.stations = json.load(f)
         
-        self.db = CollectionDatabase()
         self.logger = logging.getLogger(__name__)
         
         # Collection settings
@@ -205,6 +63,8 @@ class ProductionBuoyCollector:
         self.session.headers.update({
             'User-Agent': 'SciWaveBot/1.0 (Wave Research; +https://github.com/yourrepo/wave-forecasting)'
         })
+        
+        # No data retention - maintain full historical logs
         
         # Graceful shutdown handling
         self.shutdown_requested = False
@@ -216,12 +76,121 @@ class ProductionBuoyCollector:
         self.logger.info(f"Shutdown signal {signum} received, finishing current operations...")
         self.shutdown_requested = True
     
-    def _calculate_file_hash(self, content: str) -> str:
-        """Calculate SHA256 hash of content for deduplication"""
-        return hashlib.sha256(content.encode('utf-8')).hexdigest()[:16]
+    def _get_data_filepath(self, station_id: str, data_type: str) -> Path:
+        """Get the path to the historical data file for a station/data_type"""
+        filename = f"{station_id}_{data_type}.gz"
+        return self.data_dir / "current" / filename
     
-    def collect_station_data(self, station_id: str, data_type: str) -> CollectionRecord:
-        """Collect data for a single station"""
+    def _parse_timestamp_from_line(self, line: str, data_type: str) -> Optional[datetime]:
+        """Parse timestamp from a data line"""
+        if not line.strip() or line.startswith('#'):
+            return None
+        
+        parts = line.split()
+        if len(parts) < 5:
+            return None
+        
+        try:
+            year = int(parts[0])
+            if year < 100:  # 2-digit year
+                year += 2000
+            month = int(parts[1])
+            day = int(parts[2])
+            hour = int(parts[3])
+            minute = int(parts[4])
+            
+            return datetime(year, month, day, hour, minute)
+        except (ValueError, IndexError):
+            return None
+    
+    def _load_existing_data(self, filepath: Path) -> Tuple[List[str], Optional[datetime], Optional[datetime]]:
+        """Load existing data file and return lines with first/last timestamps"""
+        if not filepath.exists():
+            return [], None, None
+        
+        try:
+            with gzip.open(filepath, 'rt') as f:
+                lines = f.read().strip().split('\n')
+            
+            # Find data lines (non-comment, non-empty)
+            data_lines = [line for line in lines if line.strip() and not line.startswith('#')]
+            
+            if not data_lines:
+                return lines, None, None
+            
+            # Get first and last timestamps
+            data_type = filepath.stem.split('_')[1]  # Extract data_type from filename
+            first_ts = self._parse_timestamp_from_line(data_lines[0], data_type)
+            last_ts = self._parse_timestamp_from_line(data_lines[-1], data_type)
+            
+            return lines, first_ts, last_ts
+            
+        except Exception as e:
+            self.logger.error(f"Error loading existing data from {filepath}: {e}")
+            return [], None, None
+    
+    def _clean_old_data(self, lines: List[str], data_type: str) -> List[str]:
+        """No cleaning - maintain full historical record"""
+        return lines
+    
+    def _deduplicate_and_sort(self, lines: List[str], new_content: str, data_type: str) -> Tuple[List[str], int]:
+        """Merge new content with existing data, deduplicating and sorting by timestamp"""
+        # Parse new content
+        new_lines = new_content.strip().split('\n')
+        new_data_lines = [line for line in new_lines if line.strip() and not line.startswith('#')]
+        
+        # Get existing data lines
+        existing_data = [line for line in lines if line.strip() and not line.startswith('#')]
+        
+        # Combine and deduplicate by timestamp
+        timestamp_to_line = {}
+        
+        # Add existing data
+        for line in existing_data:
+            ts = self._parse_timestamp_from_line(line, data_type)
+            if ts:
+                timestamp_to_line[ts] = line
+        
+        # Add new data (will overwrite duplicates)
+        new_records_count = 0
+        for line in new_data_lines:
+            ts = self._parse_timestamp_from_line(line, data_type)
+            if ts:
+                if ts not in timestamp_to_line:
+                    new_records_count += 1
+                timestamp_to_line[ts] = line
+        
+        # Sort by timestamp and recreate lines
+        sorted_timestamps = sorted(timestamp_to_line.keys())
+        sorted_data_lines = [timestamp_to_line[ts] for ts in sorted_timestamps]
+        
+        # Keep original header structure
+        header_lines = [line for line in lines if line.startswith('#') or not line.strip()]
+        if not header_lines and new_lines:
+            # Use headers from new content if no existing headers
+            header_lines = [line for line in new_lines if line.startswith('#') or not line.strip()]
+        
+        final_lines = header_lines + sorted_data_lines
+        return final_lines, new_records_count
+    
+    def _atomic_write(self, filepath: Path, content: str) -> None:
+        """Atomically write content to file using temporary file"""
+        temp_path = filepath.parent / f".{filepath.name}.tmp"
+        
+        try:
+            with gzip.open(temp_path, 'wt') as f:
+                f.write(content)
+            
+            # Atomic move
+            shutil.move(temp_path, filepath)
+            
+        except Exception as e:
+            if temp_path.exists():
+                temp_path.unlink()
+            raise e
+    
+    def collect_and_update_station_data(self, station_id: str, data_type: str) -> CollectionRecord:
+        """Collect new data and update the station's data file"""
         start_time = time.time()
         
         # Determine URL based on data type
@@ -237,54 +206,51 @@ class ProductionBuoyCollector:
             raise ValueError(f"Unknown data type: {data_type}")
         
         try:
-            # Make request
+            # Fetch new data
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
             
             response_time = time.time() - start_time
-            content = response.text.strip()
+            new_content = response.text.strip()
             
-            if not content or len(content) < 100:
+            if not new_content or len(new_content) < 100:
                 return CollectionRecord(
                     station_id=station_id,
                     timestamp=datetime.now(),
                     data_type=data_type,
                     status="empty",
                     records_collected=0,
+                    records_appended=0,
                     file_size=0,
                     response_time=response_time
                 )
             
-            # Calculate hash for deduplication
-            content_hash = self._calculate_file_hash(content)
+            # Get filepath and load existing data
+            filepath = self._get_data_filepath(station_id, data_type)
+            existing_lines, first_ts, last_ts = self._load_existing_data(filepath)
             
-            # Count records (lines that don't start with # and aren't empty)
-            lines = [line for line in content.split('\n') if line.strip() and not line.startswith('#')]
-            records_count = len(lines)
+            # Merge and deduplicate (no cleaning - maintain full history)
+            final_lines, new_records = self._deduplicate_and_sort(existing_lines, new_content, data_type)
             
-            # Save raw data
-            timestamp = datetime.now()
-            filename = self._get_filename(station_id, data_type, timestamp)
-            filepath = self.data_dir / "raw" / filename
+            # Write updated file atomically
+            final_content = '\n'.join(final_lines)
+            self._atomic_write(filepath, final_content)
             
-            # Ensure directory exists
-            filepath.parent.mkdir(parents=True, exist_ok=True)
+            file_size = filepath.stat().st_size
+            content_hash = hashlib.sha256(new_content.encode('utf-8')).hexdigest()[:16]
             
-            # Compress and save (add .gz extension here)
-            compressed_filepath = filepath.with_suffix('.gz')
-            with gzip.open(compressed_filepath, 'wt') as f:
-                f.write(content)
+            # Count total records in new content
+            new_lines = [line for line in new_content.split('\n') if line.strip() and not line.startswith('#')]
             
-            file_size = compressed_filepath.stat().st_size
-            
-            self.logger.debug(f"Collected {records_count} records for {station_id} ({data_type})")
+            self.logger.debug(f"Updated {station_id}_{data_type}: +{new_records} new records")
             
             return CollectionRecord(
                 station_id=station_id,
-                timestamp=timestamp,
+                timestamp=datetime.now(),
                 data_type=data_type,
                 status="success",
-                records_collected=records_count,
+                records_collected=len(new_lines),
+                records_appended=new_records,
                 file_size=file_size,
                 response_time=response_time,
                 data_hash=content_hash
@@ -297,6 +263,7 @@ class ProductionBuoyCollector:
                 data_type=data_type,
                 status="network_error",
                 records_collected=0,
+                records_appended=0,
                 file_size=0,
                 error_message=str(e),
                 response_time=time.time() - start_time
@@ -310,16 +277,11 @@ class ProductionBuoyCollector:
                 data_type=data_type,
                 status="error",
                 records_collected=0,
+                records_appended=0,
                 file_size=0,
                 error_message=str(e),
                 response_time=time.time() - start_time
             )
-    
-    def _get_filename(self, station_id: str, data_type: str, timestamp: datetime) -> str:
-        """Generate filename for raw data (without extension)"""
-        date_str = timestamp.strftime("%Y%m%d")
-        time_str = timestamp.strftime("%H%M")
-        return f"{station_id}_{data_type}_{date_str}_{time_str}"
     
     def get_priority_stations(self, max_stations: int = 30) -> List[str]:
         """Get prioritized station list for collection"""
@@ -336,8 +298,8 @@ class ProductionBuoyCollector:
         candidates.sort(key=lambda x: x[1])
         return [station_id for station_id, _ in candidates[:max_stations]]
     
-    def collect_batch(self, station_ids: List[str], max_workers: int = 8) -> Dict[str, List[CollectionRecord]]:
-        """Collect data for multiple stations in parallel"""
+    def collect_batch_optimized(self, station_ids: List[str], max_workers: int = 8) -> Dict[str, List[CollectionRecord]]:
+        """Collect data for multiple stations using optimized approach"""
         results = {}
         
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -351,14 +313,14 @@ class ProductionBuoyCollector:
                 # Collect multiple data types for stations with raw spectral capability
                 if self.stations.get(station_id, {}).get('has_spectral', False):
                     # Collect raw spectral density (the real treasure!)
-                    futures[executor.submit(self.collect_station_data, station_id, "raw_spectral")] = (station_id, "raw_spectral")
+                    futures[executor.submit(self.collect_and_update_station_data, station_id, "raw_spectral")] = (station_id, "raw_spectral")
                     # Collect directional spectral data  
-                    futures[executor.submit(self.collect_station_data, station_id, "directional")] = (station_id, "directional")
+                    futures[executor.submit(self.collect_and_update_station_data, station_id, "directional")] = (station_id, "directional")
                     # Still collect summary for comparison
-                    futures[executor.submit(self.collect_station_data, station_id, "spectral")] = (station_id, "spectral")
+                    futures[executor.submit(self.collect_and_update_station_data, station_id, "spectral")] = (station_id, "spectral")
                 
                 # Always collect standard wave data
-                futures[executor.submit(self.collect_station_data, station_id, "wave")] = (station_id, "wave")
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "wave")] = (station_id, "wave")
             
             # Collect results
             for future in as_completed(futures):
@@ -374,40 +336,47 @@ class ProductionBuoyCollector:
                         results[station_id] = []
                     results[station_id].append(record)
                     
-                    # Record in database
-                    self.db.record_collection(record)
-                    
                 except Exception as e:
                     self.logger.error(f"Error processing {station_id} ({data_type}): {e}")
         
         return results
     
-    def run_continuous_collection(self, interval_minutes: int = 60, max_workers: int = 8):
-        """Run continuous data collection"""
+    def archive_old_data(self) -> None:
+        """Archive system disabled - maintaining full historical logs"""
+        self.logger.info("Archive system disabled - maintaining full historical logs")
+        pass
+    
+    def run_continuous_collection(self, interval_minutes: int = 30, max_workers: int = 8):
+        """Run continuous optimized data collection"""
         station_list = self.get_priority_stations()
         self.logger.info(f"Starting continuous collection for {len(station_list)} stations")
         self.logger.info(f"Collection interval: {interval_minutes} minutes")
-        self.logger.info(f"Priority stations: {', '.join(station_list[:10])}{'...' if len(station_list) > 10 else ''}")
+        self.logger.info(f"Maintaining full historical logs (no data expiration)")
+        
+        cycle_count = 0
         
         while not self.shutdown_requested:
             cycle_start = time.time()
+            cycle_count += 1
             
             try:
-                self.logger.info("Starting collection cycle...")
-                results = self.collect_batch(station_list, max_workers)
+                self.logger.info(f"Starting collection cycle {cycle_count}...")
+                results = self.collect_batch_optimized(station_list, max_workers)
                 
-                # Log cycle summary
+                # Calculate statistics
                 total_collections = sum(len(records) for records in results.values())
                 successful = sum(1 for records in results.values() 
                                for record in records if record.status == "success")
+                new_records = sum(record.records_appended for records in results.values() 
+                                for record in records if record.status == "success")
                 
                 cycle_time = time.time() - cycle_start
-                self.logger.info(f"Cycle complete: {successful}/{total_collections} successful in {cycle_time:.1f}s")
+                self.logger.info(f"Cycle {cycle_count} complete: {successful}/{total_collections} successful, "
+                               f"{new_records} new records in {cycle_time:.1f}s")
                 
-                # Print detailed stats every few cycles
-                if datetime.now().minute % 30 == 0:  # Every 30 minutes
-                    stats = self.db.get_statistics(hours=6)
-                    self.logger.info(f"6-hour statistics: {stats}")
+                # Optional backup every 24 cycles (~12 hours at 30min intervals)
+                if cycle_count % 24 == 0:
+                    self.logger.info(f"Completed {cycle_count} cycles - logs growing continuously")
                 
                 # Wait for next cycle
                 sleep_time = max(0, (interval_minutes * 60) - cycle_time)
@@ -416,42 +385,48 @@ class ProductionBuoyCollector:
                     time.sleep(sleep_time)
                 
             except Exception as e:
-                self.logger.error(f"Error in collection cycle: {e}")
+                self.logger.error(f"Error in collection cycle {cycle_count}: {e}")
                 time.sleep(300)  # Wait 5 minutes before retry
         
         self.logger.info("Collection stopped gracefully")
     
-    def run_single_collection(self, station_ids: Optional[List[str]] = None):
-        """Run a single collection cycle"""
-        if station_ids is None:
-            station_ids = self.get_priority_stations()
+    def get_data_summary(self) -> Dict:
+        """Get summary of current data files"""
+        current_dir = self.data_dir / "current"
+        summary = {}
         
-        self.logger.info(f"Running single collection for {len(station_ids)} stations")
-        results = self.collect_batch(station_ids)
+        for filepath in current_dir.glob("*.gz"):
+            try:
+                lines, first_ts, last_ts = self._load_existing_data(filepath)
+                data_lines = [line for line in lines if line.strip() and not line.startswith('#')]
+                
+                parts = filepath.stem.split('_')
+                station_id = parts[0]
+                data_type = parts[1]
+                
+                if station_id not in summary:
+                    summary[station_id] = {}
+                
+                # Calculate days of data
+                days_of_data = (last_ts - first_ts).days if (first_ts and last_ts) else 0
+                
+                summary[station_id][data_type] = {
+                    'records': len(data_lines),
+                    'first_timestamp': first_ts.isoformat() if first_ts else None,
+                    'last_timestamp': last_ts.isoformat() if last_ts else None,
+                    'file_size_mb': filepath.stat().st_size / (1024 * 1024),
+                    'days_of_data': days_of_data
+                }
+                
+            except Exception as e:
+                self.logger.error(f"Error analyzing {filepath}: {e}")
         
-        # Print results
-        print(f"\nCollection Results:")
-        print(f"{'Station':<8} {'Type':<8} {'Status':<12} {'Records':<8} {'Size (KB)':<10} {'Time (s)':<8}")
-        print("-" * 70)
-        
-        for station_id, records in results.items():
-            for record in records:
-                status_symbol = "✓" if record.status == "success" else "✗"
-                size_kb = record.file_size / 1024 if record.file_size else 0
-                print(f"{station_id:<8} {record.data_type:<8} {status_symbol} {record.status:<11} "
-                      f"{record.records_collected:<8} {size_kb:<10.1f} {record.response_time or 0:<8.2f}")
-        
-        # Summary stats
-        total_records = sum(r.records_collected for records in results.values() for r in records)
-        successful_collections = sum(1 for records in results.values() 
-                                   for r in records if r.status == "success")
-        total_collections = sum(len(records) for records in results.values())
-        
-        print(f"\nSummary: {successful_collections}/{total_collections} successful, "
-              f"{total_records} total records collected")
+        return summary
 
 def main():
-    parser = argparse.ArgumentParser(description="Production NDBC Data Collector")
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Optimized NDBC Data Collector")
     parser.add_argument("--config", default="enhanced_stations.json", 
                        help="Enhanced stations configuration file")
     parser.add_argument("--data-dir", default="data/buoy_data", 
@@ -460,52 +435,93 @@ def main():
                        help="Comma-separated station IDs (default: use priority list)")
     parser.add_argument("--continuous", action="store_true", 
                        help="Run continuous collection")
-    parser.add_argument("--interval", type=int, default=60, 
-                       help="Collection interval in minutes (default: 60)")
+    parser.add_argument("--interval", type=int, default=30, 
+                       help="Collection interval in minutes (default: 30)")
     parser.add_argument("--max-workers", type=int, default=8, 
                        help="Maximum parallel workers (default: 8)")
-    parser.add_argument("--log-dir", default="logs", 
-                       help="Directory for log files")
-    parser.add_argument("--quiet", action="store_true", 
-                       help="Reduce console output")
+    parser.add_argument("--summary", action="store_true",
+                       help="Show current data summary")
+    parser.add_argument("--archive", action="store_true",
+                       help="Run data archival process")
     
     args = parser.parse_args()
     
     # Setup logging
-    logger = setup_logging(args.log_dir)
-    if args.quiet:
-        logging.getLogger().handlers[1].setLevel(logging.WARNING)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
     
     # Initialize collector
     try:
-        collector = ProductionBuoyCollector(args.data_dir, args.config)
+        collector = OptimizedBuoyCollector(args.data_dir, args.config)
     except FileNotFoundError as e:
-        logger.error(f"Configuration file not found: {e}")
-        logger.info("Run the station enhancer first: python station_enhancer.py")
-        sys.exit(1)
+        print(f"Configuration file not found: {e}")
+        return 1
     except Exception as e:
-        logger.error(f"Failed to initialize collector: {e}")
-        sys.exit(1)
+        print(f"Failed to initialize collector: {e}")
+        return 1
+    
+    # Handle different modes
+    if args.summary:
+        summary = collector.get_data_summary()
+        print("\nData Summary:")
+        print("=" * 80)
+        for station_id, data_types in summary.items():
+            print(f"\nStation {station_id}:")
+            for data_type, stats in data_types.items():
+                print(f"  {data_type:12}: {stats['records']:5} records, "
+                      f"{stats['file_size_mb']:6.1f}MB, "
+                      f"{stats['days_of_data']:2} days "
+                      f"({stats['first_timestamp'][:10] if stats['first_timestamp'] else 'N/A'} to "
+                      f"{stats['last_timestamp'][:10] if stats['last_timestamp'] else 'N/A'})")
+        return 0
+    
+    if args.archive:
+        collector.archive_old_data()
+        return 0
     
     # Determine stations to collect
     if args.stations:
         station_list = [s.strip() for s in args.stations.split(",")]
-        logger.info(f"Using specified stations: {station_list}")
     else:
         station_list = collector.get_priority_stations()
-        logger.info(f"Using {len(station_list)} priority stations")
     
     # Run collection
     try:
         if args.continuous:
             collector.run_continuous_collection(args.interval, args.max_workers)
         else:
-            collector.run_single_collection(station_list)
+            results = collector.collect_batch_optimized(station_list)
+            
+            # Print results
+            print(f"\nCollection Results:")
+            print(f"{'Station':<8} {'Type':<12} {'Status':<12} {'New':<5} {'Total':<7} {'Size (KB)':<10}")
+            print("-" * 70)
+            
+            for station_id, records in results.items():
+                for record in records:
+                    status_symbol = "✓" if record.status == "success" else "✗"
+                    size_kb = record.file_size / 1024 if record.file_size else 0
+                    print(f"{station_id:<8} {record.data_type:<12} {status_symbol} {record.status:<11} "
+                          f"{record.records_appended:<5} {record.records_collected:<7} {size_kb:<10.1f}")
+            
+            # Summary stats
+            total_new = sum(record.records_appended for records in results.values() 
+                           for record in records if record.status == "success")
+            successful_collections = sum(1 for records in results.values() 
+                                       for record in records if record.status == "success")
+            total_collections = sum(len(records) for records in results.values())
+            
+            print(f"\nSummary: {successful_collections}/{total_collections} successful, "
+                  f"{total_new} new records added")
+    
     except KeyboardInterrupt:
-        logger.info("Collection interrupted by user")
+        print("Collection interrupted by user")
+        return 0
     except Exception as e:
-        logger.error(f"Collection failed: {e}")
-        sys.exit(1)
+        print(f"Collection failed: {e}")
+        return 1
 
 if __name__ == "__main__":
-    main()
+    exit(main())
