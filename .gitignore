@@ -2,3 +2,71 @@ data/buoy_data/
 *.db
 *.log
 *.pid
+# Data files
+data/buoy_data/
+*.gz
+*.db
+*.log
+*.pid
+
+# Large data files
+swell_data.bin
+processed_features.json
+raw_spectral_features.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Logs
+logs/
+collector_output.log
+collector.log
+errors.log
+
+# Process files
+collector.pid
+*.pid
+
+# Local config
+.env
+.env.local
+
+# Archive
+archive/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Test coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Distribution
+dist/
+build/
+*.egg-info/
