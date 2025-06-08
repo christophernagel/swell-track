@@ -14321,8 +14321,9 @@
       96.13207571816457
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": true,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46001.txt",
@@ -14330,7 +14331,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46001"
     },
     "enhanced_type": "spectral_buoy",
-    "collection_priority": 4
+    "collection_priority": 1
   },
   "46002": {
     "lat": 42.662,
@@ -14370,8 +14371,9 @@
       86.96342914403073
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": true,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46002.txt",
@@ -14379,7 +14381,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46002"
     },
     "enhanced_type": "other",
-    "collection_priority": 4
+    "collection_priority": 1
   },
   "46004": {
     "lat": 50.93,
@@ -14419,8 +14421,9 @@
       88.48218829028883
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46004.txt",
@@ -14428,7 +14431,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46004"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46005": {
     "lat": 46.143,
@@ -14468,8 +14471,9 @@
       78.25581274054917
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": true,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46005.txt",
@@ -14477,7 +14481,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46005"
     },
     "enhanced_type": "other",
-    "collection_priority": 4
+    "collection_priority": 1
   },
   "46006": {
     "lat": 40.764,
@@ -14490,8 +14494,9 @@
     "distances": [],
     "bearings": [],
     "neighbor_count": 0,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": true,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46006.txt",
@@ -14499,7 +14504,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46006"
     },
     "enhanced_type": "spectral_buoy",
-    "collection_priority": 4
+    "collection_priority": 1
   },
   "46011": {
     "lat": 34.937,
@@ -15126,8 +15131,9 @@
       10.354386241388056
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46036.txt",
@@ -15135,7 +15141,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46036"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46041": {
     "lat": 47.352,
@@ -15897,8 +15903,9 @@
       352.4369512616171
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46076.txt",
@@ -15906,7 +15913,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46076"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46077": {
     "lat": 57.869,
@@ -15946,8 +15953,9 @@
       38.45837471220426
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46077.txt",
@@ -15955,7 +15963,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46077"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46078": {
     "lat": 55.561,
@@ -15995,8 +16003,9 @@
       72.10301733383085
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46078.txt",
@@ -16004,7 +16013,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46078"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46080": {
     "lat": 57.91,
@@ -16044,8 +16053,9 @@
       339.09483161582205
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46080.txt",
@@ -16053,7 +16063,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46080"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46081": {
     "lat": 60.802,
@@ -16142,8 +16152,9 @@
       186.28891102832424
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46082.txt",
@@ -16151,7 +16162,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46082"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46083": {
     "lat": 58.27,
@@ -16191,8 +16202,9 @@
       92.48723486152284
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46083.txt",
@@ -16200,7 +16212,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46083"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46084": {
     "lat": 56.614,
@@ -16240,8 +16252,9 @@
       119.33521160557274
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46084.txt",
@@ -16249,7 +16262,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46084"
     },
     "enhanced_type": "other",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46085": {
     "lat": 55.878,
@@ -16289,8 +16302,9 @@
       76.20341945821053
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46085.txt",
@@ -16298,7 +16312,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46085"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46086": {
     "lat": 32.499,
@@ -16838,8 +16852,9 @@
       185.35567133291164
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46108.txt",
@@ -16847,7 +16862,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46108"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46116": {
     "lat": 46.287,
@@ -17537,8 +17552,9 @@
       20.781659155193836
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46145.txt",
@@ -17546,7 +17562,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46145"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46146": {
     "lat": 49.34,
@@ -17636,8 +17652,9 @@
       227.5001563711932
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46147.txt",
@@ -17645,7 +17662,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46147"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46181": {
     "lat": 53.83,
@@ -17685,8 +17702,9 @@
       313.9394735617417
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46181.txt",
@@ -17694,7 +17712,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46181"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46183": {
     "lat": 53.62,
@@ -17734,8 +17752,9 @@
       350.1042607578225
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46183.txt",
@@ -17743,7 +17762,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46183"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46184": {
     "lat": 53.92,
@@ -17783,8 +17802,9 @@
       149.61633138563684
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46184.txt",
@@ -17792,7 +17812,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46184"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46185": {
     "lat": 52.42,
@@ -17832,8 +17852,9 @@
       322.2421782834567
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46185.txt",
@@ -17841,7 +17862,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46185"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46204": {
     "lat": 51.38,
@@ -17881,8 +17902,9 @@
       296.79444188596005
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46204.txt",
@@ -17890,7 +17912,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46204"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46205": {
     "lat": 54.18,
@@ -17930,8 +17952,9 @@
       148.96731969004577
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46205.txt",
@@ -17939,7 +17962,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46205"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46206": {
     "lat": 48.84,
@@ -18029,8 +18052,9 @@
       12.246990410599551
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46207.txt",
@@ -18038,7 +18062,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46207"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46208": {
     "lat": 52.52,
@@ -18078,8 +18102,9 @@
       234.377497941358
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46208.txt",
@@ -18087,7 +18112,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46208"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46211": {
     "lat": 46.857,
@@ -19109,8 +19134,9 @@
       45.640249175519216
     ],
     "neighbor_count": 2,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46246.txt",
@@ -19118,7 +19144,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46246"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46248": {
     "lat": 46.133,
@@ -20455,9 +20481,9 @@
       67.32381919103989
     ],
     "neighbor_count": 8,
-    "region": "west_coast_north",
+    "region": "north_pacific_storm_track",
     "priority": 1,
-    "region_description": "Northern California to Oregon",
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46404.txt",
@@ -20505,9 +20531,9 @@
       77.50192507573763
     ],
     "neighbor_count": 8,
-    "region": "west_coast_north",
+    "region": "north_pacific_storm_track",
     "priority": 1,
-    "region_description": "Northern California to Oregon",
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46407.txt",
@@ -20598,8 +20624,9 @@
       78.13305026951275
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46409.txt",
@@ -20607,7 +20634,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46409"
     },
     "enhanced_type": "dart",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46410": {
     "lat": 57.649,
@@ -20647,8 +20674,9 @@
       329.7856592815102
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46410.txt",
@@ -20656,7 +20684,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46410"
     },
     "enhanced_type": "dart",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46411": {
     "lat": 39.337,
@@ -20785,8 +20813,9 @@
       359.9314268684547
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46414.txt",
@@ -20794,7 +20823,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46414"
     },
     "enhanced_type": "dart",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46415": {
     "lat": 53.035,
@@ -20834,8 +20863,9 @@
       41.222755140136655
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46415.txt",
@@ -20843,7 +20873,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46415"
     },
     "enhanced_type": "dart",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46416": {
     "lat": 49.892,
@@ -20883,8 +20913,9 @@
       65.3043533582927
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46416.txt",
@@ -20892,7 +20923,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=46416"
     },
     "enhanced_type": "dart",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "46419": {
     "lat": 48.815,
@@ -20932,9 +20963,9 @@
       341.9268657283492
     ],
     "neighbor_count": 8,
-    "region": "west_coast_north",
+    "region": "north_pacific_storm_track",
     "priority": 1,
-    "region_description": "Northern California to Oregon",
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/46419.txt",
@@ -20992,8 +21023,9 @@
       44.22197163880804
     ],
     "neighbor_count": 2,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/48400.txt",
@@ -21001,7 +21033,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=48400"
     },
     "enhanced_type": "standard_buoy",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "51000": {
     "lat": 23.528,
@@ -26074,8 +26106,9 @@
       125.72415273354841
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/abya2.txt",
@@ -26083,7 +26116,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=abya2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "acfs1": {
     "lat": 32.664,
@@ -26566,8 +26599,9 @@
       305.2724438834014
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/ajxa2.txt",
@@ -26575,7 +26609,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=ajxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "akxa2": {
     "lat": 54.132,
@@ -26664,8 +26698,9 @@
       10.452045988606642
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/alia2.txt",
@@ -26673,7 +26708,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=alia2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "alxn6": {
     "lat": 44.331,
@@ -26763,8 +26798,9 @@
       303.4890296864806
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/amaa2.txt",
@@ -26772,7 +26808,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=amaa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "amrl1": {
     "lat": 29.45,
@@ -27397,8 +27433,9 @@
       20.44654047664841
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/apxa2.txt",
@@ -27406,7 +27443,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=apxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "apxf1": {
     "lat": 29.769,
@@ -27794,8 +27831,9 @@
       76.39624492640826
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/auga2.txt",
@@ -27803,7 +27841,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=auga2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "awrt2": {
     "lat": 28.227,
@@ -29221,8 +29259,9 @@
       94.74416883175246
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/blta2.txt",
@@ -29230,7 +29269,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=blta2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "bltm2": {
     "lat": 39.267,
@@ -30720,8 +30759,9 @@
       109.50290958866782
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/cdea2.txt",
@@ -30729,7 +30769,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=cdea2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "cdrf1": {
     "lat": 29.136,
@@ -30819,8 +30859,9 @@
       109.50290958866782
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/cdxa2.txt",
@@ -30828,7 +30869,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=cdxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "cecc1": {
     "lat": 41.746,
@@ -32712,8 +32753,9 @@
       98.37460925700856
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/crga2.txt",
@@ -32721,7 +32763,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=crga2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "crta1": {
     "lat": 30.308,
@@ -32910,8 +32952,9 @@
       276.17176230962576
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/cspa2.txt",
@@ -32919,7 +32962,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=cspa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "csxa2": {
     "lat": 58.199,
@@ -32959,8 +33002,9 @@
       276.17536527991894
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/csxa2.txt",
@@ -32968,7 +33012,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=csxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "cvqv2": {
     "lat": 37.571,
@@ -34639,8 +34683,9 @@
       90.7922867865505
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/elfa2.txt",
@@ -34648,7 +34693,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=elfa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "elqc1": {
     "lat": 36.818,
@@ -34938,8 +34983,9 @@
       214.19895054139462
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/eroa2.txt",
@@ -34947,7 +34993,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=eroa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "erxa2": {
     "lat": 58.971,
@@ -34987,8 +35033,9 @@
       214.19895054139462
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/erxa2.txt",
@@ -34996,7 +35043,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=erxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "espp4": {
     "lat": 18.094,
@@ -35285,8 +35332,9 @@
       261.45486697910945
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/ffia2.txt",
@@ -35294,7 +35342,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=ffia2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "fhpf1": {
     "lat": 28.153,
@@ -35384,8 +35432,9 @@
       8.304531605995066
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/fila2.txt",
@@ -35393,7 +35442,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=fila2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "flqn6": {
     "lat": 42.354,
@@ -37153,8 +37202,9 @@
       92.37741033689491
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/gexa2.txt",
@@ -37162,7 +37212,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=gexa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "gggc1": {
     "lat": 38.016,
@@ -37302,8 +37352,9 @@
       272.77023761326825
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/gixa2.txt",
@@ -37311,7 +37362,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=gixa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "gkyf1": {
     "lat": 24.627,
@@ -37450,8 +37501,9 @@
       321.8437559951908
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/gpxa2.txt",
@@ -37459,7 +37511,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=gpxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "grbl1": {
     "lat": 29.101,
@@ -37999,8 +38051,9 @@
       110.13016934783371
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/guxa2.txt",
@@ -38008,7 +38061,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=guxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "haxa2": {
     "lat": 59.234,
@@ -38048,8 +38101,9 @@
       162.75965179593743
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/haxa2.txt",
@@ -38057,7 +38111,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=haxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "hbmn6": {
     "lat": 41.314,
@@ -38547,8 +38601,9 @@
       202.22556616351406
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/hmra2.txt",
@@ -38556,7 +38611,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=hmra2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "hmsa2": {
     "lat": 59.602,
@@ -38596,8 +38651,9 @@
       201.93615868306682
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/hmsa2.txt",
@@ -38605,7 +38661,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=hmsa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "hrbm4": {
     "lat": 43.846,
@@ -38945,8 +39001,9 @@
       298.3002037289295
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/icya2.txt",
@@ -38954,7 +39011,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=icya2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "iloh1": {
     "lat": 19.73,
@@ -39193,8 +39250,9 @@
       154.31852119980147
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/itka2.txt",
@@ -39202,7 +39260,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=itka2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "jaki2": {
     "lat": 41.781,
@@ -39542,8 +39600,9 @@
       142.02415200663086
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/jlxa2.txt",
@@ -39551,7 +39610,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=jlxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "jmla2": {
     "lat": 58.286,
@@ -39591,8 +39650,9 @@
       304.60815185209117
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/jmla2.txt",
@@ -39600,7 +39660,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=jmla2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "jmpn7": {
     "lat": 34.213,
@@ -39690,8 +39750,9 @@
       140.9126712011274
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/jnea2.txt",
@@ -39699,7 +39760,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=jnea2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "jnga2": {
     "lat": 58.291,
@@ -39739,8 +39800,9 @@
       303.3472843089219
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/jnga2.txt",
@@ -39748,7 +39810,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=jnga2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "jobp4": {
     "lat": 17.944,
@@ -40235,8 +40297,9 @@
       202.23339965930955
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/kcha2.txt",
@@ -40244,7 +40307,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=kcha2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "kcvw": {
     "lat": 29.784,
@@ -40383,8 +40446,9 @@
       345.5076962753428
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/kdaa2.txt",
@@ -40392,7 +40456,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=kdaa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "kdlp": {
     "lat": 29.121,
@@ -40482,8 +40546,9 @@
       142.9203792820175
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/keca2.txt",
@@ -40491,7 +40556,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=keca2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "kehc": {
     "lat": 28.429,
@@ -40681,8 +40746,9 @@
       141.71472037633487
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/kexa2.txt",
@@ -40690,7 +40756,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=kexa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "kgbk": {
     "lat": 27.204,
@@ -41129,8 +41195,9 @@
       343.66417515433864
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/kgxa2.txt",
@@ -41138,7 +41205,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=kgxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "khhv": {
     "lat": 26.939,
@@ -41578,8 +41645,9 @@
       343.85037528435043
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/kmxa2.txt",
@@ -41587,7 +41655,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=kmxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "kmzg": {
     "lat": 27.727,
@@ -43048,8 +43116,9 @@
       140.8231879405073
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/lcna2.txt",
@@ -43057,7 +43126,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=lcna2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "ldlc3": {
     "lat": 41.306,
@@ -43197,8 +43266,9 @@
       249.89498792747776
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/lixa2.txt",
@@ -43206,7 +43276,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=lixa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "ljac1": {
     "lat": 32.867,
@@ -43929,8 +43999,9 @@
       330.72491876726644
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/lpwa2.txt",
@@ -43938,7 +44009,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=lpwa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "lqat2": {
     "lat": 27.881,
@@ -45326,8 +45397,9 @@
       282.1705397143872
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/mdxa2.txt",
@@ -45335,7 +45407,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=mdxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "meem4": {
     "lat": 44.251,
@@ -45922,8 +45994,9 @@
       326.1958190131026
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/mixa2.txt",
@@ -45931,7 +46004,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=mixa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "mkgm4": {
     "lat": 43.228,
@@ -46520,8 +46593,9 @@
       321.0436226866692
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/mrna2.txt",
@@ -46529,7 +46603,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=mrna2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "mros1": {
     "lat": 33.656,
@@ -46669,8 +46743,9 @@
       311.15751529664703
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/mrya2.txt",
@@ -46678,7 +46753,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=mrya2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "mtbf1": {
     "lat": 27.661,
@@ -46868,8 +46943,9 @@
       125.09542645250144
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/mvxa2.txt",
@@ -46877,7 +46953,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=mvxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "mwqt2": {
     "lat": 27.838,
@@ -46967,8 +47043,9 @@
       139.28896264058704
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/mxxa2.txt",
@@ -46976,7 +47053,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=mxxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "mypf1": {
     "lat": 30.398,
@@ -47963,8 +48040,9 @@
       58.38671032205082
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/nkxa2.txt",
@@ -47972,7 +48050,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=nkxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "nlhc3": {
     "lat": 41.372,
@@ -49990,8 +50068,9 @@
       192.85765231263704
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/ovia2.txt",
@@ -49999,7 +50078,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=ovia2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "owdo1": {
     "lat": 41.365,
@@ -50488,8 +50567,9 @@
       319.4049493721498
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/paxa2.txt",
@@ -50497,7 +50577,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=paxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "pbfw1": {
     "lat": 48.464,
@@ -50687,8 +50767,9 @@
       305.1965156340765
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/pbpa2.txt",
@@ -50696,7 +50777,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=pbpa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "pbwm4": {
     "lat": 43.002,
@@ -51086,8 +51167,9 @@
       352.2214012236886
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/pcxa2.txt",
@@ -51095,7 +51177,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=pcxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "pdvr1": {
     "lat": 41.611,
@@ -51235,8 +51317,9 @@
       108.03592900715665
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/pexa2.txt",
@@ -51244,7 +51327,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=pexa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "pfdc1": {
     "lat": 33.735,
@@ -51421,8 +51504,9 @@
       337.25605699167164
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/pgxa2.txt",
@@ -51430,7 +51514,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=pgxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "phbp1": {
     "lat": 39.933,
@@ -51520,8 +51604,9 @@
       256.12064656138443
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/pila2.txt",
@@ -51529,7 +51614,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=pila2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "pill1": {
     "lat": 29.179,
@@ -51768,8 +51853,9 @@
       335.1236572093188
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/plxa2.txt",
@@ -51777,7 +51863,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=plxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "pmaf1": {
     "lat": 27.638,
@@ -52649,8 +52735,9 @@
       141.6293108101039
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/prta2.txt",
@@ -52658,7 +52745,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=prta2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "prur1": {
     "lat": 41.605,
@@ -53548,8 +53635,9 @@
       104.85998019597974
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/ptla2.txt",
@@ -53557,7 +53645,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=ptla2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "ptoa1": {
     "lat": 30.671,
@@ -54339,8 +54427,9 @@
       51.24680835964932
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/rixa2.txt",
@@ -54348,7 +54437,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=rixa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "rkqf1": {
     "lat": 26.027,
@@ -55570,8 +55659,9 @@
       56.92942756382081
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/scxa2.txt",
@@ -55579,7 +55669,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=scxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "sdbc1": {
     "lat": 32.714,
@@ -55719,8 +55809,9 @@
       307.4510333626891
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/sdia2.txt",
@@ -55728,7 +55819,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=sdia2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "sdrt2": {
     "lat": 28.407,
@@ -55918,8 +56009,9 @@
       192.78046923924856
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/seqa2.txt",
@@ -55927,7 +56019,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=seqa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "seto3": {
     "lat": 46.2,
@@ -56366,8 +56458,9 @@
       154.17632572768684
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/shxa2.txt",
@@ -56375,7 +56468,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=shxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "sipf1": {
     "lat": 27.862,
@@ -56465,8 +56558,9 @@
       56.90059255669024
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/sisa2.txt",
@@ -56474,7 +56568,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=sisa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "sisw1": {
     "lat": 48.321,
@@ -56763,8 +56857,9 @@
       191.3500338230529
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/skta2.txt",
@@ -56772,7 +56867,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=skta2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "skxa2": {
     "lat": 59.448,
@@ -56812,8 +56907,9 @@
       191.3990904521423
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/skxa2.txt",
@@ -56821,7 +56917,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=skxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "slim2": {
     "lat": 38.321,
@@ -57060,8 +57156,9 @@
       142.63342673540046
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/slxa2.txt",
@@ -57069,7 +57166,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=slxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "smkf1": {
     "lat": 24.628,
@@ -57478,8 +57575,9 @@
       257.06498842218826
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/spxa2.txt",
@@ -57487,7 +57585,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=spxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "sraw1": {
     "lat": 45.572,
@@ -57777,8 +57875,9 @@
       124.07913513803192
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/srxa2.txt",
@@ -57786,7 +57885,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=srxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "ssbn7": {
     "lat": 33.838,
@@ -57926,8 +58025,9 @@
       332.2975656908945
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/stxa2.txt",
@@ -57935,7 +58035,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=stxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "svnm4": {
     "lat": 42.401,
@@ -58313,8 +58413,9 @@
       143.26049075347032
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/sxxa2.txt",
@@ -58322,7 +58423,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=sxxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "syww3": {
     "lat": 45.202,
@@ -59333,8 +59434,9 @@
       12.33757051711234
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/tkea2.txt",
@@ -59342,7 +59444,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=tkea2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "tkpn6": {
     "lat": 42.014,
@@ -59732,8 +59834,9 @@
       243.9649161749595
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/tpxa2.txt",
@@ -59741,7 +59844,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=tpxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "trbl1": {
     "lat": 29.187,
@@ -61260,8 +61363,9 @@
       142.5092656046615
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/wcxa2.txt",
@@ -61269,7 +61373,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=wcxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "wdel1": {
     "lat": 28.662,
@@ -61609,8 +61713,9 @@
       160.7741646929545
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/wgxa2.txt",
@@ -61618,7 +61723,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=wgxa2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "whri2": {
     "lat": 42.361,
@@ -62596,8 +62701,9 @@
       126.28444679441446
     ],
     "neighbor_count": 8,
-    "region": "other",
-    "priority": 5,
+    "region": "north_pacific_storm_track",
+    "priority": 1,
+    "region_description": "North Pacific Storm Genesis & Swell Tracking",
     "has_spectral": false,
     "data_urls": {
       "realtime_txt": "https://www.ndbc.noaa.gov/data/realtime2/yata2.txt",
@@ -62605,7 +62711,7 @@
       "station_page": "https://www.ndbc.noaa.gov/station_page.php?station=yata2"
     },
     "enhanced_type": "fixed",
-    "collection_priority": 5
+    "collection_priority": 1
   },
   "ygnn6": {
     "lat": 43.262,

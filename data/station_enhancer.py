@@ -24,6 +24,11 @@ class StationEnhancer:
     def __init__(self):
         # Priority regions for wave forecasting
         self.priority_regions = {
+            'north_pacific_storm_track': {
+                'bounds': {'lat': (40.0, 60.0), 'lon': (-155.0, -128.0)},
+                'priority': 1,
+                'description': 'North Pacific Storm Genesis & Swell Tracking'
+            },
             'west_coast_north': {
                 'bounds': {'lat': (40.0, 50.0), 'lon': (-130.0, -120.0)},
                 'priority': 1,

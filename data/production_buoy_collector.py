@@ -310,16 +310,10 @@ class OptimizedBuoyCollector:
                 if self.shutdown_requested:
                     break
                 
-                # Collect multiple data types for stations with raw spectral capability
-                if self.stations.get(station_id, {}).get('has_spectral', False):
-                    # Collect raw spectral density (the real treasure!)
-                    futures[executor.submit(self.collect_and_update_station_data, station_id, "raw_spectral")] = (station_id, "raw_spectral")
-                    # Collect directional spectral data  
-                    futures[executor.submit(self.collect_and_update_station_data, station_id, "directional")] = (station_id, "directional")
-                    # Still collect summary for comparison
-                    futures[executor.submit(self.collect_and_update_station_data, station_id, "spectral")] = (station_id, "spectral")
-                
-                # Always collect standard wave data
+                # Collect all data types for every station (let NDBC decide what's available)
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "raw_spectral")] = (station_id, "raw_spectral")
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "directional")] = (station_id, "directional") 
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "spectral")] = (station_id, "spectral")
                 futures[executor.submit(self.collect_and_update_station_data, station_id, "wave")] = (station_id, "wave")
             
             # Collect results
