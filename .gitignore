@@ -70,3 +70,7 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+west_coast_physics.json
+*.json # Ignore all JSON data files
+enhanced_features.json
+*_features.json
