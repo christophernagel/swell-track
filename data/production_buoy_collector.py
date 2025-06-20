@@ -193,12 +193,16 @@ class OptimizedBuoyCollector:
         """Collect new data and update the station's data file"""
         start_time = time.time()
         
-        # Determine URL based on data type
         url_map = {
             "wave": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.txt",
             "spectral": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.spec",
             "raw_spectral": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.data_spec",
-            "directional": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.swdir"
+            
+            # Complete directional suite
+            "directional_alpha1": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.swdir",   # Mean direction
+            "directional_alpha2": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.swdir2",  # Secondary direction
+            "directional_r1": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.swr1",        # Primary spread
+            "directional_r2": f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.swr2"         # Secondary spread
         }
         
         url = url_map.get(data_type)
@@ -312,7 +316,10 @@ class OptimizedBuoyCollector:
                 
                 # Collect all data types for every station (let NDBC decide what's available)
                 futures[executor.submit(self.collect_and_update_station_data, station_id, "raw_spectral")] = (station_id, "raw_spectral")
-                futures[executor.submit(self.collect_and_update_station_data, station_id, "directional")] = (station_id, "directional") 
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "directional_alpha1")] = (station_id, "directional_alpha1")
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "directional_alpha2")] = (station_id, "directional_alpha2")
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "directional_r1")] = (station_id, "directional_r1")
+                futures[executor.submit(self.collect_and_update_station_data, station_id, "directional_r2")] = (station_id, "directional_r2")
                 futures[executor.submit(self.collect_and_update_station_data, station_id, "spectral")] = (station_id, "spectral")
                 futures[executor.submit(self.collect_and_update_station_data, station_id, "wave")] = (station_id, "wave")
             
@@ -394,9 +401,22 @@ class OptimizedBuoyCollector:
                 lines, first_ts, last_ts = self._load_existing_data(filepath)
                 data_lines = [line for line in lines if line.strip() and not line.startswith('#')]
                 
-                parts = filepath.stem.split('_')
-                station_id = parts[0]
-                data_type = parts[1]
+                # Parse filename: handle both old and new naming conventions
+                stem = filepath.stem  # Remove .gz extension
+                if '_directional_' in stem:
+                    # New format: 46022_directional_alpha1
+                    parts = stem.split('_directional_')
+                    station_id = parts[0]
+                    data_type = f"directional_{parts[1]}"
+                elif '_raw_spectral' in stem:
+                    # New format: 46022_raw_spectral  
+                    station_id = stem.replace('_raw_spectral', '')
+                    data_type = 'raw_spectral'
+                else:
+                    # Standard format: 46022_wave, 46022_spectral
+                    parts = stem.split('_', 1)  # Split only on first underscore
+                    station_id = parts[0]
+                    data_type = parts[1] if len(parts) > 1 else 'unknown'
                 
                 if station_id not in summary:
                     summary[station_id] = {}
