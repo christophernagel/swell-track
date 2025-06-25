@@ -228,7 +228,7 @@ class EnhancedMultiStreamProcessor:
             return None
 
     def parse_wave_line(self, line: str, headers: List[str]) -> Optional[Dict]:
-        """Parse meteorological/wave data line - FIXED VERSION"""
+        """Parse meteorological/wave data line - EXTENSIVE DEBUG VERSION"""
         if line.startswith('#') or not line.strip():
             return None
         
@@ -241,24 +241,68 @@ class EnhancedMultiStreamProcessor:
             data = {}
             for i, header in enumerate(headers):
                 if i < len(parts):
-                    data[header.upper()] = parts[i]  # Store as uppercase for consistency
+                    data[header] = parts[i]
             
-            # Parse timestamp - handle the cleaned headers
-            year = int(data.get('YY', data.get('YYYY', '0')))
+            # DEBUG: Initialize counter
+            if hasattr(self, '_debug_count'):
+                self._debug_count += 1
+            else:
+                self._debug_count = 1
+                
+            # EXTENSIVE DEBUG for first few records
+            if self._debug_count <= 5:
+                logger.debug(f"=== Wave parsing debug #{self._debug_count} ===")
+                logger.debug(f"Raw line: {line.strip()}")
+                logger.debug(f"Headers: {headers}")
+                logger.debug(f"Parts: {parts}")
+                logger.debug(f"Data mapping: {data}")
+            
+            # Parse timestamp fields with extensive debugging
+            year_raw = data.get('YY', '0')
+            month_raw = data.get('MM', '0') 
+            day_raw = data.get('DD', '0')
+            hour_raw = data.get('hh', '0')
+            minute_raw = data.get('mm', '0')  # This might be the issue!
+            
+            if self._debug_count <= 5:
+                logger.debug(f"Raw timestamp fields:")
+                logger.debug(f"  YY (year): '{year_raw}'")
+                logger.debug(f"  MM (month): '{month_raw}'")
+                logger.debug(f"  DD (day): '{day_raw}'")
+                logger.debug(f"  hh (hour): '{hour_raw}'")
+                logger.debug(f"  mm (minute): '{minute_raw}'")
+            
+            year = int(year_raw)
             if year < 100:
                 year += 2000
-            month = int(data.get('MM', '0'))
-            day = int(data.get('DD', '0'))
-            hour = int(data.get('HH', '0'))
-            minute = int(data.get('MN', data.get('MIN', '0')))
+                
+            month = int(month_raw)
+            day = int(day_raw)
+            hour = int(hour_raw)
+            minute = int(minute_raw)
             
+            if self._debug_count <= 5:
+                logger.debug(f"Parsed timestamp components:")
+                logger.debug(f"  Year: {year}")
+                logger.debug(f"  Month: {month}")
+                logger.debug(f"  Day: {day}")
+                logger.debug(f"  Hour: {hour}")
+                logger.debug(f"  Minute: {minute}")
+            
+            # Validate date components
             if not (1900 <= year <= 2030 and 1 <= month <= 12 and 1 <= day <= 31 and 0 <= hour <= 23 and 0 <= minute <= 59):
+                if self._debug_count <= 5:
+                    logger.debug(f"❌ INVALID timestamp: {year}-{month:02d}-{day:02d} {hour:02d}:{minute:02d}")
                 return None
             
             timestamp = datetime(year, month, day, hour, minute)
+            
+            if self._debug_count <= 5:
+                logger.debug(f"✅ Created timestamp: {timestamp}")
+            
             parsed_rec = {'timestamp': timestamp}
             
-            # Parse parameters using exact header names from your data
+            # Parse parameters using exact header names
             param_mappings = {
                 'wvht': 'WVHT',     # Wave height
                 'dpd': 'DPD',       # Dominant period
@@ -288,13 +332,23 @@ class EnhancedMultiStreamProcessor:
                             
                     except ValueError:
                         value = np.nan
+                        
+                # Debug wind parameters specifically
+                if param_name in ['wspd', 'wdir'] and self._debug_count <= 5:
+                    raw_val = data.get(header_name, 'NOT_FOUND')
+                    logger.debug(f"  {param_name}: '{raw_val}' -> {value}")
                 
                 parsed_rec[param_name] = value
+            
+            if self._debug_count <= 5:
+                logger.debug(f"Final parsed record: {parsed_rec}")
+                logger.debug("="*50)
             
             return parsed_rec
             
         except (ValueError, KeyError, IndexError) as e:
-            logger.debug(f"Wave parsing error: {e}")
+            if hasattr(self, '_debug_count') and self._debug_count <= 5:
+                logger.debug(f"❌ Wave parsing error: {e}")
             return None
 
     def interpolate_to_standard_grid(self, frequencies: np.ndarray, values: np.ndarray) -> np.ndarray:
@@ -568,7 +622,7 @@ class EnhancedMultiStreamProcessor:
         return spectral_records, directional_records, wave_records
 
     def create_enhanced_features(self, station_id: str, verbose: bool = False) -> Tuple[np.ndarray, List[datetime], Dict]:
-        """Create enhanced 20-dimensional feature vectors - FIXED VERSION"""
+        """Create enhanced 20-dimensional feature vectors - FIXED TEMPORAL ALIGNMENT"""
         spectral_recs, dir_recs, wave_recs = self.load_station_files(station_id)
         
         if not spectral_recs:
@@ -581,6 +635,17 @@ class EnhancedMultiStreamProcessor:
         # Convert to DataFrames for temporal alignment
         spec_df = pd.DataFrame(spectral_recs).set_index('timestamp')
         wave_df = pd.DataFrame(wave_recs).set_index('timestamp') if wave_recs else None
+        
+        # DEBUG: Show timestamp ranges
+        if verbose and wave_df is not None:
+            logger.debug(f"Spectral timestamp range: {spec_df.index.min()} to {spec_df.index.max()}")
+            logger.debug(f"Wave timestamp range: {wave_df.index.min()} to {wave_df.index.max()}")
+            logger.debug(f"Wave records with valid wind speed: {(~wave_df['wspd'].isna()).sum()}")
+            
+            # Show first few wave records with wind data
+            valid_wind = wave_df[~wave_df['wspd'].isna()].head(3)
+            for ts, row in valid_wind.iterrows():
+                logger.debug(f"Wave record at {ts}: wspd={row['wspd']}, wdir={row['wdir']}")
         
         # Convert directional records to DataFrames
         dir_dfs = {}
@@ -597,6 +662,7 @@ class EnhancedMultiStreamProcessor:
         features = []
         timestamps = []
         processing_errors = 0
+        meteorological_matches = 0
         
         for timestamp, row in spec_df.iterrows():
             try:
@@ -626,7 +692,7 @@ class EnhancedMultiStreamProcessor:
                 feature_vector[8] = wave_components['swell_fraction']
                 feature_vector[9] = wave_components['windsea_fraction']
                 
-                # Compute directional physics features (10-14) - FIXED VERSION
+                # Compute directional physics features (10-14)
                 dir_data = {}
                 for dtype in ['alpha1', 'alpha2', 'r1', 'r2']:
                     if dtype in dir_dfs and len(dir_dfs[dtype]) > 0:
@@ -636,7 +702,6 @@ class EnhancedMultiStreamProcessor:
                         min_diff = time_diffs[min_diff_idx]
                         if min_diff <= pd.Timedelta(minutes=30):
                             closest_timestamp = dir_dfs[dtype].index[min_diff_idx]
-                            # FIX: Convert pandas Series to dict to avoid boolean evaluation issues
                             series_data = dir_dfs[dtype].loc[closest_timestamp]
                             dir_data[dtype] = {
                                 'frequencies': series_data['frequencies'],
@@ -645,7 +710,7 @@ class EnhancedMultiStreamProcessor:
                                 'n_frequencies': series_data['n_frequencies']
                             }
                 
-                if len(dir_data) >= 2:  # Need at least alpha1 and r1
+                if len(dir_data) >= 2:
                     directional_features = self.compute_directional_features(
                         dir_data.get('alpha1'), dir_data.get('alpha2'),
                         dir_data.get('r1'), dir_data.get('r2'),
@@ -658,34 +723,53 @@ class EnhancedMultiStreamProcessor:
                     feature_vector[13] = directional_features['bimodal_strength']
                     feature_vector[14] = directional_features['directional_separation']
                 
-                # Compute meteorological physics features (15-17) - FIXED VERSION
+                # FIXED: Compute meteorological physics features (15-17)
                 if wave_df is not None and len(wave_df) > 0:
+                    # EXPANDED SEARCH WINDOW: Try 60 minutes instead of 30
                     time_diffs = abs(wave_df.index - timestamp)
                     min_diff_idx = time_diffs.argmin()
                     min_diff = time_diffs[min_diff_idx]
-                    if min_diff <= pd.Timedelta(minutes=30):
+                    
+                    # DEBUG: Show temporal matching attempts for first few records
+                    if len(features) < 3 and verbose:
+                        closest_timestamp = wave_df.index[min_diff_idx]
+                        logger.debug(f"Spectral timestamp: {timestamp}")
+                        logger.debug(f"Closest wave timestamp: {closest_timestamp}")
+                        logger.debug(f"Time difference: {min_diff}")
+                        if min_diff <= pd.Timedelta(minutes=60):
+                            closest_wave = wave_df.loc[closest_timestamp]
+                            logger.debug(f"Wave data at match: wspd={closest_wave.get('wspd')}, wdir={closest_wave.get('wdir')}")
+                    
+                    if min_diff <= pd.Timedelta(minutes=60):  # EXPANDED to 60 minutes
                         closest_timestamp = wave_df.index[min_diff_idx]
                         closest_wave = wave_df.loc[closest_timestamp]
                         
-                        feature_vector[15] = closest_wave.get('wspd', np.nan)  # Wind speed
-                        feature_vector[16] = closest_wave.get('wdir', np.nan)  # Wind direction
+                        # Extract wind data
+                        wind_speed = closest_wave.get('wspd', np.nan)
+                        wind_direction = closest_wave.get('wdir', np.nan)
+                        
+                        feature_vector[15] = wind_speed
+                        feature_vector[16] = wind_direction
                         
                         # Wind-wave alignment
-                        if (not np.isnan(feature_vector[16]) and not np.isnan(feature_vector[10])):
-                            wind_dir = feature_vector[16]
+                        if (not np.isnan(wind_direction) and not np.isnan(feature_vector[10])):
                             wave_dir = feature_vector[10]
-                            alignment = abs(wind_dir - wave_dir)
-                            feature_vector[17] = min(alignment, 360 - alignment)  # Minimum angular difference
+                            alignment = abs(wind_direction - wave_dir)
+                            feature_vector[17] = min(alignment, 360 - alignment)
                         
                         # Validation features (18-19)
                         reported_hs = closest_wave.get('wvht', np.nan)
                         reported_tp = closest_wave.get('dpd', np.nan)
                         
                         if not np.isnan(reported_hs) and not np.isnan(feature_vector[0]):
-                            feature_vector[18] = abs(feature_vector[0] - reported_hs) / max(feature_vector[0], reported_hs) if max(feature_vector[0], reported_hs) > 0 else 0
+                            feature_vector[18] = abs(feature_vector[0] - reported_hs) / max(feature_vector[0], reported_hs, 0.01)
                         
                         if not np.isnan(reported_tp) and not np.isnan(feature_vector[1]):
-                            feature_vector[19] = abs(feature_vector[1] - reported_tp) / max(feature_vector[1], reported_tp) if max(feature_vector[1], reported_tp) > 0 else 0
+                            feature_vector[19] = abs(feature_vector[1] - reported_tp) / max(feature_vector[1], reported_tp, 0.01)
+                        
+                        # Count successful meteorological matches
+                        if not np.isnan(wind_speed) or not np.isnan(wind_direction):
+                            meteorological_matches += 1
                 
                 # Only keep records with valid significant wave height
                 if not np.isnan(feature_vector[0]):
@@ -695,7 +779,6 @@ class EnhancedMultiStreamProcessor:
             except Exception as e:
                 processing_errors += 1
                 logger.debug(f"Error processing record at {timestamp}: {e}")
-                # FIX: Use the 'verbose' argument instead of 'args.verbose'
                 if verbose:
                     import traceback
                     logger.debug(f"Full traceback: {traceback.format_exc()}")
@@ -707,12 +790,15 @@ class EnhancedMultiStreamProcessor:
             'total_records': len(spectral_recs),
             'valid_features': len(features),
             'processing_errors': processing_errors,
-            'completeness': len(features) / len(spectral_recs) if spectral_recs else 0
+            'completeness': len(features) / len(spectral_recs) if spectral_recs else 0,
+            'meteorological_matches': meteorological_matches
         }
+        
+        if verbose:
+            logger.debug(f"Meteorological matching summary: {meteorological_matches}/{len(features)} successful matches")
         
         if features:
             stats['time_span_days'] = (max(timestamps) - min(timestamps)).days if len(timestamps) > 1 else 0
-            # Calculate nan_percentage only if features_array is not empty
             if features_array.size > 0:
                 stats['nan_percentage_by_feature'] = np.isnan(features_array).mean(axis=0).tolist() * 100
             else:
