@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 train_wave_model.py
-------------------
-Quick start script for training your physics-informed wave forecasting model
-using your enhanced 20-dimensional features.
+-------------------
+Main executable script for training the physics-informed wave forecasting model.
+This script orchestrates data loading, model creation, training, and evaluation.
 """
 
 import argparse
@@ -11,31 +11,48 @@ import torch
 import json
 from pathlib import Path
 
+# Custom module imports with error handling
+try:
+    # --- THIS IS THE FIX ---
+    # FEATURE_NAMES is correctly imported from enhanced_wave_sequencer where it is defined
+    from enhanced_wave_sequencer import create_enhanced_dataloaders, FEATURE_NAMES
+    from physics_wave_transformer import create_physics_model
+    from physics_wave_trainer import PhysicsWaveTrainer
+    # --- END FIX ---
+except ImportError as e:
+    print(f"❌ Import Error: {e}")
+    print("💡 Please ensure all required modules (enhanced_wave_sequencer.py, physics_wave_transformer.py, physics_wave_trainer.py) are in the same directory or your Python path.")
+    exit(1)
+
 def main():
-    parser = argparse.ArgumentParser(description="Train Physics-Informed Wave Forecasting Model")
-    parser.add_argument("--features", default="pacific_enhanced_features.json", 
-                       help="Enhanced features JSON file from full_spectrum_processor")
-    parser.add_argument("--sequence-length", type=int, default=24, 
-                       help="Sequence length in hours (default: 24)")
-    parser.add_argument("--batch-size", type=int, default=8, 
-                       help="Batch size (default: 8)")
-    parser.add_argument("--epochs", type=int, default=100, 
-                       help="Number of training epochs")
-    parser.add_argument("--device", default="auto", 
-                       help="Device: 'cuda', 'cpu', or 'auto'")
-    parser.add_argument("--no-wandb", action="store_true", 
-                       help="Disable Weights & Biases logging")
+    parser = argparse.ArgumentParser(
+        description="Train Physics-Informed Wave Forecasting Model.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument("--features", type=str, default="enhanced_features.json",
+                        help="Path to the enhanced features JSON file.")
+    parser.add_argument("--sequence-length", type=int, default=24,
+                        help="Input sequence length in hours.")
+    parser.add_argument("--batch-size", type=int, default=16,
+                        help="Training batch size.")
+    parser.add_argument("--epochs", type=int, default=100,
+                        help="Maximum number of training epochs.")
+    parser.add_argument("--device", type=str, default="auto",
+                        help="Device to use: 'cuda', 'cpu', or 'auto'.")
+    parser.add_argument("--no-wandb", action="store_true",
+                        help="Disable Weights & Biases logging.")
     parser.add_argument("--min-stations", type=int, default=3,
-                       help="Minimum stations required per sequence")
-    
+                        help="Minimum number of stations required per training sequence.")
+    parser.add_argument("--num-workers", type=int, default=2,
+                        help="Number of worker processes for data loading.")
     args = parser.parse_args()
-    
-    # Setup device
+
+    # --- 1. Setup Environment ---
     if args.device == "auto":
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     else:
         device = torch.device(args.device)
-    
+
     print("🌊 Physics-Informed Wave Forecasting Training")
     print("=" * 50)
     print(f"📂 Features file: {args.features}")
@@ -44,84 +61,52 @@ def main():
     print(f"🔢 Batch size: {args.batch_size}")
     print(f"🔄 Epochs: {args.epochs}")
     print(f"🏭 Min stations per sequence: {args.min_stations}")
-    
-    # Check if features file exists
-    if not Path(args.features).exists():
-        print(f"❌ Features file not found: {args.features}")
-        print("💡 Run this command first:")
-        print(f"   python data/full_spectrum_processor.py --output {args.features}")
-        return 1
-    
-    # Load and check features file
+
+    # --- 2. Load and Prepare Data ---
+    features_path = Path(args.features)
+    if not features_path.exists():
+        print(f"\n❌ Features file not found: {features_path}")
+        return
+
+    print("\n🔄 Creating dataloaders with 70/15/15 split...")
     try:
-        with open(args.features, 'r') as f:
-            features_data = json.load(f)
-        
-        num_stations = len(features_data)
-        total_features = sum(len(data.get('enhanced_features', [])) for data in features_data.values())
-        
-        print(f"✅ Loaded features: {num_stations} stations, {total_features:,} feature vectors")
-        
-        # Show station coverage
-        station_ids = list(features_data.keys())
-        print(f"📍 Stations: {', '.join(station_ids)}")
-        
-    except Exception as e:
-        print(f"❌ Error loading features file: {e}")
-        return 1
-    
-    # Import training components
-    try:
-        from enhanced_wave_sequencer import create_enhanced_dataloaders
-        from physics_wave_transformer import create_physics_model
-        from physics_wave_trainer import PhysicsWaveTrainer
-    except ImportError as e:
-        print(f"❌ Import error: {e}")
-        print("💡 Make sure all training modules are in your Python path")
-        return 1
-    
-    print("\n🔄 Creating dataloaders...")
-    
-    # Create enhanced dataloaders
-    try:
-        train_loader, val_loader = create_enhanced_dataloaders(
-            features_file=args.features,
+        train_loader, val_loader, test_loader, normalizer = create_enhanced_dataloaders(
+            features_file=str(features_path),
             sequence_length=args.sequence_length,
             batch_size=args.batch_size,
-            split_ratio=0.8,
+            split_ratios=(0.7, 0.15, 0.15),
             min_stations=args.min_stations,
-            normalize_features=True,
-            interpolate_missing=True
+            interpolate_missing=True,
+            num_workers=args.num_workers
         )
-        
         print(f"📊 Train batches: {len(train_loader)}")
         print(f"📊 Validation batches: {len(val_loader)}")
-        
+        print(f"🧪 Test batches: {len(test_loader)}")
         if len(train_loader) == 0:
-            print("❌ No training sequences created!")
-            print("💡 Try reducing --min-stations or --sequence-length")
-            return 1
-            
+            print("\n❌ No training sequences were created! Check data or parameters.")
+            return
+
     except Exception as e:
-        print(f"❌ Error creating dataloaders: {e}")
-        return 1
-    
+        print(f"\n❌ Error creating dataloaders: {e}")
+        import traceback
+        traceback.print_exc()
+        return
+
+    # --- 3. Create Model ---
     print("\n🧠 Creating physics-informed model...")
-    
-    # Create model
     try:
-        model, criterion, optimizer, scheduler = create_physics_model(device=str(device))
+        model, criterion, optimizer, scheduler = create_physics_model(
+            device=str(device)
+        )
         
         num_params = sum(p.numel() for p in model.parameters())
         print(f"🔢 Model parameters: {num_params:,}")
-        
     except Exception as e:
-        print(f"❌ Error creating model: {e}")
-        return 1
-    
+        print(f"\n❌ Error creating model: {e}")
+        return
+
+    # --- 4. Train Model ---
     print("\n🏋️ Starting training...")
-    
-    # Create trainer
     try:
         trainer = PhysicsWaveTrainer(
             model=model,
@@ -129,44 +114,48 @@ def main():
             optimizer=optimizer,
             scheduler=scheduler,
             device=str(device),
-            log_wandb=not args.no_wandb
+            log_wandb=not args.no_wandb,
+            feature_names=FEATURE_NAMES 
         )
-        
-        # Train the model
+
         history = trainer.train(
             train_loader=train_loader,
             val_loader=val_loader,
-            num_epochs=args.epochs
+            test_loader=test_loader,
+            num_epochs=args.epochs,
+            normalizer=normalizer
         )
-        
         print("\n🎉 Training completed successfully!")
-        
-        # Plot training curves
-        print("📊 Generating training curves...")
-        trainer.plot_training_curves('training_curves.png')
-        
-        # Save training history
-        with open('training_history.json', 'w') as f:
-            json.dump(history, f, indent=2)
-        
-        print("\n✅ Results saved:")
-        print("  📈 training_curves.png - Training progress plots")
-        print("  💾 wave_model_checkpoints/best_model.pth - Best model checkpoint")
-        print("  📊 training_history.json - Complete training metrics")
-        
-        # Show final metrics
-        if 'val_wave_height_mae' in history:
-            final_mae = history['val_wave_height_mae'][-1]
-            print(f"\n🌊 Final validation wave height MAE: {final_mae:.3f}m")
-        
-        return 0
-        
+
     except Exception as e:
-        print(f"❌ Training error: {e}")
+        print(f"\n❌ Training error: {e}")
         import traceback
         traceback.print_exc()
-        return 1
+        return
 
+    # --- 5. Save Artifacts and Report Results ---
+    print("\n📊 Generating training curves...")
+    trainer.plot_training_curves(save_path='training_curves.png')
+
+    with open('training_history.json', 'w') as f:
+        serializable_history = json.loads(json.dumps(history, default=lambda o: o.item() if hasattr(o, 'item') else o.__dict__))
+        json.dump(serializable_history, f, indent=4)
+
+    print("\n✅ Results saved:")
+    print(f"  📈 training_curves.png")
+    print(f"  💾 {trainer.save_dir}/best_model.pth - Best model checkpoint")
+    print(f"  💾 {trainer.save_dir}/wave_normalizer.pkl - Fitted data normalizer")
+    print(f"  📊 training_history.json - Complete training metrics")
+
+    if 'test_metrics' in history:
+        print("\n" + "="*50)
+        print("🧪 FINAL UNBIASED TEST SET PERFORMANCE")
+        print("="*50)
+        test_metrics = history['test_metrics']
+        print(f"  - Test Loss: {test_metrics.get('test_total_loss', 0):.4f}")
+        print(f"  - Test Wave Height MAE: {test_metrics.get('test_wave_height_mae', 0):.3f}m")
+        print(f"  - Test Peak Period MAE: {test_metrics.get('test_peak_period_mae', 0):.3f}s")
+        print(f"  - Test Energy Conservation Error: {test_metrics.get('test_energy_conservation_error', 0):.4f}")
 
 if __name__ == "__main__":
-    exit(main())
+    main()
