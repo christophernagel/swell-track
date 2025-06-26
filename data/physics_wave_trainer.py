@@ -226,7 +226,11 @@ class PhysicsWaveTrainer:
         
         # --- Final Test Evaluation ---
         print("🧪 Evaluating best model on the held-out test set...")
-        self.model.load_state_dict(torch.load(self.save_dir / 'best_model.pth')['model_state_dict'])
+        
+        # CRITICAL FIX: Add weights_only=False for PyTorch 2.6 compatibility
+        checkpoint = torch.load(self.save_dir / 'best_model.pth', weights_only=False)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        
         test_metrics = self.validate_epoch(test_loader, is_test=True)
         self.metrics_history['test_metrics'] = test_metrics
 
