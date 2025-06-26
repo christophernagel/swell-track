@@ -74,3 +74,22 @@ west_coast_physics.json
 *.json # Ignore all JSON data files
 enhanced_features.json
 *_features.json
+
+# Training outputs and model checkpoints
+wave_model_checkpoints/
+training_curves.png
+training_history.json
+*.pth
+
+# W&B experiment tracking
+wandb/
+
+# Large data files
+california_coast_stations.json
+*_features.json
+
+# Data directories
+data/buoy_data/
+data/wandb/
+data/wave_model_checkpoints/
+

@@ -227,7 +227,6 @@ class PhysicsWaveTrainer:
             train_metrics = self.train_epoch(train_loader)
             val_metrics = self.validate_epoch(val_loader)
             
-            # --- FIX: Use the correct key 'val_total' ---
             val_loss = val_metrics.get('val_total', float('inf'))
 
             if self.scheduler and isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
@@ -251,7 +250,6 @@ class PhysicsWaveTrainer:
                 self.patience_counter += 1
             
             epoch_time = (datetime.now() - epoch_start).total_seconds()
-            # --- FIX: Use the correct key 'train_total' ---
             print(f"Epoch {epoch+1:3d}/{num_epochs} | "
                   f"Train Loss: {train_metrics.get('train_total', 0):.4f} | "
                   f"Val Loss: {val_loss:.4f} | "
@@ -291,7 +289,6 @@ class PhysicsWaveTrainer:
         fig, axes = plt.subplots(2, 3, figsize=(20, 12))
         axes = axes.flatten()
         
-        # --- FIX: Use correct metric keys from loss function ---
         plot_configs = [
             ('total', 'Total Loss'),
             ('spectral_loss', 'Spectral Loss'),
@@ -322,3 +319,79 @@ class PhysicsWaveTrainer:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
         else:
             plt.show()
+
+
+# --- FIX: Helper function to convert numpy types to native python types ---
+def convert_to_native_types(obj):
+    """Recursively convert numpy types in a dictionary to native Python types."""
+    if isinstance(obj, dict):
+        return {k: convert_to_native_types(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_native_types(i) for i in obj]
+    elif isinstance(obj, np.generic):
+        return obj.item()
+    return obj
+
+
+def main_training_pipeline(features_file: str = "pacific_enhanced_features.json"):
+    """Complete training pipeline for your enhanced features"""
+    
+    # Setup device
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"🚀 Using device: {device}")
+    
+    # Create enhanced dataloaders
+    from enhanced_wave_sequencer import create_enhanced_dataloaders
+    
+    train_loader, val_loader = create_enhanced_dataloaders(
+        features_file=features_file,
+        sequence_length=24,  # 24 hours of history
+        batch_size=16,
+        split_ratio=0.8,
+        min_stations=3,
+        normalize_features=True,
+        interpolate_missing=True,
+        num_workers=2
+    )
+    
+    print(f"📊 Created dataloaders: {len(train_loader)} train, {len(val_loader)} val batches")
+    
+    # Create physics-informed model
+    from physics_wave_transformer import create_physics_model
+    
+    model, criterion, optimizer, scheduler = create_physics_model(device=device)
+    
+    print(f"🧠 Model parameters: {sum(p.numel() for p in model.parameters()):,}")
+    
+    # Create trainer
+    trainer = PhysicsWaveTrainer(
+        model=model,
+        criterion=criterion,
+        optimizer=optimizer,
+        scheduler=scheduler,
+        device=device,
+        log_wandb=True
+    )
+    
+    # Train the model
+    history = trainer.train(
+        train_loader=train_loader,
+        val_loader=val_loader,
+        num_epochs=100
+    )
+    
+    # Plot training curves
+    trainer.plot_training_curves('training_curves.png')
+    
+    # --- FIX: Convert numpy types before saving to JSON ---
+    history_native = convert_to_native_types(history)
+    with open('training_history.json', 'w') as f:
+        json.dump(history_native, f, indent=2)
+    
+    print("🌊 Physics-informed wave forecasting training complete!")
+    print("📊 Check 'training_curves.png' for training progress")
+    print("💾 Best model saved in 'wave_model_checkpoints/' directory")
+
+
+if __name__ == "__main__":
+    main_training_pipeline()
