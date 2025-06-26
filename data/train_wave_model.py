@@ -13,15 +13,12 @@ from pathlib import Path
 
 # Custom module imports with error handling
 try:
-    # --- THIS IS THE FIX ---
-    # FEATURE_NAMES is correctly imported from enhanced_wave_sequencer where it is defined
     from enhanced_wave_sequencer import create_enhanced_dataloaders, FEATURE_NAMES
     from physics_wave_transformer import create_physics_model
     from physics_wave_trainer import PhysicsWaveTrainer
-    # --- END FIX ---
 except ImportError as e:
     print(f"❌ Import Error: {e}")
-    print("💡 Please ensure all required modules (enhanced_wave_sequencer.py, physics_wave_transformer.py, physics_wave_trainer.py) are in the same directory or your Python path.")
+    print("💡 Please ensure all required modules are in the same directory or your Python path.")
     exit(1)
 
 def main():
@@ -43,7 +40,7 @@ def main():
                         help="Disable Weights & Biases logging.")
     parser.add_argument("--min-stations", type=int, default=3,
                         help="Minimum number of stations required per training sequence.")
-    parser.add_argument("--num-workers", type=int, default=2,
+    parser.add_argument("--num-workers", type=int, default=0,
                         help="Number of worker processes for data loading.")
     args = parser.parse_args()
 
@@ -138,7 +135,17 @@ def main():
     trainer.plot_training_curves(save_path='training_curves.png')
 
     with open('training_history.json', 'w') as f:
-        serializable_history = json.loads(json.dumps(history, default=lambda o: o.item() if hasattr(o, 'item') else o.__dict__))
+        # Convert numpy types to native Python for JSON serialization
+        def convert_numpy_types(obj):
+            if hasattr(obj, 'item'):
+                return obj.item()
+            elif isinstance(obj, dict):
+                return {k: convert_numpy_types(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_numpy_types(v) for v in obj]
+            return obj
+        
+        serializable_history = convert_numpy_types(history)
         json.dump(serializable_history, f, indent=4)
 
     print("\n✅ Results saved:")

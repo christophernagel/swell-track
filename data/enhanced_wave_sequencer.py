@@ -1,16 +1,15 @@
 # enhanced_wave_sequencer.py
-# ---
-# Corrected WaveSequenceDataset with proper, leak-free normalization.
+# Fixed version with proper normalization (no data leakage) and robust data handling
 
 import torch
 from torch.utils.data import Dataset, Subset
 import numpy as np
 import pandas as pd
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple
 import json
 from pathlib import Path
 
-# Station coordinates dictionary (as previously defined)
+# Station coordinates dictionary
 STATION_COORDS = {
     "46001": [56.3, -148.2], "46013": [38.2, -123.3], "46014": [37.8, -122.8],
     "46022": [40.7, -124.5], "46026": [35.7, -121.9], "46027": [34.5, -120.6],
@@ -36,15 +35,16 @@ class WaveDataNormalizer:
         self.means = None
         self.stds = None
 
-    def fit(self, dataset: Dataset):
+    def fit(self, dataset: Subset):
         """
         Calculates mean and std from a dataset subset (training set).
         """
         all_features = []
         for i in range(len(dataset)):
-            item = dataset[i]
+            # Access the underlying dataset's __getitem__
+            raw_item = dataset.dataset[dataset.indices[i]]
             # Reshape from (n_stations, seq_len, 20) to (n_stations * seq_len, 20)
-            features = item['sequence_features'].reshape(-1, len(self.feature_names))
+            features = raw_item['sequence_features'].reshape(-1, len(self.feature_names))
             all_features.append(features)
 
         all_features = np.vstack(all_features)
@@ -107,23 +107,33 @@ class EnhancedWaveSequenceDataset(Dataset):
         return processed
 
     def _interpolate_physics_aware(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Physics-informed interpolation for missing values - FIXED VERSION"""
         df_interp = df.copy()
-        # Linear interpolation for continuous physics variables
-        for feature_group in [self.feature_names[0:10], self.feature_names[15:18], self.feature_names[18:20]]:
-             df_interp[feature_group] = df_interp[feature_group].interpolate(method='linear', limit=3, limit_direction='both')
+        
+        # 1. Linear interpolation for continuous physics variables
+        continuous_features = self.feature_names[0:10] + self.feature_names[15:18] + self.feature_names[18:20]
+        df_interp[continuous_features] = df_interp[continuous_features].interpolate(method='linear', limit=3, limit_direction='both')
 
-        # Circular interpolation for directional data
+        # 2. Circular interpolation for directional data
         for feature in ['primary_direction', 'secondary_direction', 'wind_direction']:
-            angles_rad = np.radians(df_interp[feature])
-            x, y = np.cos(angles_rad), np.sin(angles_rad)
-            x_interp = x.interpolate(method='linear', limit=2, limit_direction='both')
-            y_interp = y.interpolate(method='linear', limit=2, limit_direction='both')
-            angles_interp = np.degrees(np.arctan2(y_interp, x_interp)) % 360
-            df_interp[feature] = angles_interp
+            if feature in df_interp.columns:
+                angles_rad = np.radians(df_interp[feature])
+                x, y = np.cos(angles_rad), np.sin(angles_rad)
+                x_interp = x.interpolate(method='linear', limit=2, limit_direction='both')
+                y_interp = y.interpolate(method='linear', limit=2, limit_direction='both')
+                angles_interp = np.degrees(np.arctan2(y_interp, x_interp)) % 360
+                df_interp[feature] = angles_interp
 
-        # Forward fill for remaining directional spread features
+        # 3. Forward fill for remaining directional spread features
         remaining_directional = ['primary_spread', 'bimodal_strength', 'directional_separation']
         df_interp[remaining_directional] = df_interp[remaining_directional].ffill(limit=2).bfill(limit=2)
+        
+        # 4. CRITICAL FIX: Use robust forward/backward fill instead of fillna(0)
+        df_interp = df_interp.ffill().bfill()
+        
+        # 5. Only as final failsafe for completely empty columns
+        df_interp = df_interp.fillna(method='ffill').fillna(method='bfill').fillna(0)
+        
         return df_interp
 
     def _create_sequences(self) -> List[Dict]:
@@ -138,11 +148,15 @@ class EnhancedWaveSequenceDataset(Dataset):
             for station_id, df in self.processed_data.items():
                 if all(t in df.index for t in sequence_timestamps) and target_time in df.index:
                     sequence_data = df.loc[sequence_timestamps].values
-                    if not np.all(np.isnan(sequence_data[:, :10])): # Require spectral features
-                        station_features.append(sequence_data)
-                        station_ids.append(station_id)
-                        station_coords.append(STATION_COORDS.get(station_id, [0.0, 0.0]))
-                        target_features.append(df.loc[target_time].values)
+                    target_data = df.loc[target_time].values
+                    
+                    # CRITICAL: Check for NaN values after interpolation
+                    if not np.any(np.isnan(sequence_data)) and not np.any(np.isnan(target_data)):
+                        if not np.all(np.isnan(sequence_data[:, :10])): # Require spectral features
+                            station_features.append(sequence_data)
+                            station_ids.append(station_id)
+                            station_coords.append(STATION_COORDS.get(station_id, [0.0, 0.0]))
+                            target_features.append(target_data)
 
             if len(station_features) >= self.min_stations:
                 sequences.append({
@@ -221,6 +235,9 @@ def create_enhanced_dataloaders(
     """
     Creates train, validation, and test dataloaders with proper, leak-free normalization.
     """
+    # Remove any split_ratio parameter that might cause conflicts
+    dataset_kwargs.pop('split_ratio', None)
+    
     # 1. Create the full, raw dataset
     full_dataset = EnhancedWaveSequenceDataset(
         features_file=features_file,

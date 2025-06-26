@@ -1,18 +1,12 @@
-"""
-physics_wave_transformer.py
----------------------------
-Enhanced transformer architecture specifically designed for your 20-dimensional
-physics-informed wave features with spatiotemporal modeling.
-"""
+# physics_wave_transformer.py
+# Fixed version with numerical stability improvements
 
 import torch
 import torch.nn as nn
 import numpy as np
-from typing import Optional, List, Dict, Tuple
-from datetime import datetime
+from typing import Optional, List, Dict
 import math
 from itertools import chain
-
 
 class PhysicsInformedEmbedding(nn.Module):
     """
@@ -65,7 +59,6 @@ class PhysicsInformedEmbedding(nn.Module):
         ], dim=-1)
         
         return self.dropout(self.norm(combined))
-
 
 class SpatialAttention(nn.Module):
     """
@@ -128,7 +121,7 @@ class SpatialAttention(nn.Module):
         return output.unsqueeze(2).expand_as(x)
     
     def _compute_distances(self, coords: torch.Tensor) -> torch.Tensor:
-        """Compute haversine distances between station coordinates"""
+        """Compute haversine distances between station coordinates - STABILIZED VERSION"""
         R = 6371.0  # Earth radius in km
         lat = torch.deg2rad(coords[..., 0])
         lon = torch.deg2rad(coords[..., 1])
@@ -139,9 +132,12 @@ class SpatialAttention(nn.Module):
         dlat, dlon = lat2 - lat1, lon2 - lon1
         
         a = torch.sin(dlat/2)**2 + torch.cos(lat1) * torch.cos(lat2) * torch.sin(dlon/2)**2
+        
+        # CRITICAL FIX: Clamp to prevent sqrt of negative numbers from floating point errors
+        a = torch.clamp(a, 0, 1)
+        
         c = 2 * torch.atan2(torch.sqrt(a), torch.sqrt(1 - a))
         return R * c
-
 
 class WavePhysicsTransformerLayer(nn.Module):
     """
@@ -195,7 +191,6 @@ class WavePhysicsTransformerLayer(nn.Module):
         
         return x_out
 
-
 class PhysicsInformedWaveTransformer(nn.Module):
     """
     Complete physics-informed wave transformer with separate output heads
@@ -234,7 +229,6 @@ class PhysicsInformedWaveTransformer(nn.Module):
         pe[:, 1::2] = torch.cos(position * div_term)
         self.pos_encoder.data[0, :, :] = pe
         
-    # --- FIX: Added **kwargs to accept and ignore unused arguments ---
     def forward(self, sequence_features: torch.Tensor, station_coords: torch.Tensor,
                 station_mask: torch.Tensor, **kwargs) -> Dict[str, torch.Tensor]:
         B, N, T, F = sequence_features.shape
@@ -261,7 +255,6 @@ class PhysicsInformedWaveTransformer(nn.Module):
             'validation': validation_pred,
             'combined': combined_pred
         }
-
 
 class PhysicsInformedLoss(nn.Module):
     """
@@ -351,12 +344,10 @@ def create_physics_model(device: str = 'cuda'):
     optimizer = torch.optim.AdamW([
         {'params': model.feature_embedding.parameters(), 'lr': 1e-4},
         {'params': model.transformer_layers.parameters(), 'lr': 5e-5},
-        {'params': chain(
-            model.spectral_head.parameters(),
-            model.directional_head.parameters(),
-            model.meteorological_head.parameters(),
-            model.validation_head.parameters()
-         ), 'lr': 1e-4}
+        {'params': model.spectral_head.parameters(), 'lr': 1e-4},
+        {'params': model.directional_head.parameters(), 'lr': 5e-5},
+        {'params': model.meteorological_head.parameters(), 'lr': 5e-5},
+        {'params': model.validation_head.parameters(), 'lr': 5e-5}
     ], weight_decay=1e-5)
     
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
