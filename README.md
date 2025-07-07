@@ -140,7 +140,7 @@ SwellTracker employs a specialized transformer architecture that:
 pip install torch numpy pandas scipy requests wandb
 
 # Collect data for California coast stations
-python production_buoy_collector.py --stations "46022,46026,46027" --continuous
+python production_buoy_collector.py --stations "46022,46026,46027" --data-dir [directory]
 
 # Process raw data into physics features  
 python full_spectrum_processor.py --stations "46022,46026,46027" --output enhanced_features.json
@@ -168,4 +168,3 @@ python train_wave_model.py --features enhanced_features.json --epochs 100
 
 ---
 
-*SwellTracker represents a novel approach to wave forecasting that combines observational learning with physics constraints, enabling accurate predictions across complex oceanic systems.*
