@@ -1,4 +1,4 @@
-# SwellTracker: Physics-Informed Wave Forecasting with Spatiotemporal Transformers
+# SwellTracker: Physics-Informed Wave Forecasting with a Spatiotemporal Transformer
 
 **A deep learning system for predicting ocean wave conditions using multi-station buoy networks and physics-informed neural networks.**
 
