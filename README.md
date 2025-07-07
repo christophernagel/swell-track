@@ -44,7 +44,7 @@ SwellTracker employs a specialized transformer architecture that:
 
 ### 1. Data Collection (`production_buoy_collector.py`)
 
-**Purpose**: Automated collection of real-time NDBC data with full historical retention
+**Purpose**: Collection of real-time NDBC data with full historical retention
 
 **Process**:
 - Fetches 7 data streams per station: wave parameters, raw spectral density, and complete directional suite (α₁, α₂, r₁, r₂)
