@@ -6,13 +6,13 @@
 
 ## Overview
 
-SwellTracker is an advanced wave forecasting system that combines real-time oceanographic data collection with physics-informed transformer models to predict wave conditions across buoy networks. The system captures multi-dimensional wave data from NOAA's National Data Buoy Center (NDBC), processes it into physics-aware features, and uses spatiotemporal attention mechanisms to model wave propagation patterns between stations.
+SwellTracker is a wave forecasting system that combines real-time oceanographic data collection with physics-informed transformer models to predict wave conditions across buoy networks. The system captures wave data from NOAA's National Data Buoy Center (NDBC), processes it into physics-aware features, and uses spatiotemporal attention mechanisms to model wave propagation patterns between stations.
 
 Unlike traditional wave models that rely on numerical weather prediction, SwellTracker learns directly from observational data while respecting fundamental wave physics constraints like energy conservation and directional consistency.
 
 ## Core Concept: Network State Modeling
 
-The fundamental innovation of SwellTracker is treating ocean wave systems as **dynamic networks** where each buoy represents a node with complex spatiotemporal relationships. The system models:
+The fundamental idea of SwellTracker is treating ocean wave systems as **dynamic networks** where each buoy represents a node with complex spatiotemporal relationships. The system models:
 
 - **Network State**: The collective wave conditions across all active buoy stations at any given time
 - **Propagation Patterns**: How wave energy travels between stations based on distance, bathymetry, and wave physics
